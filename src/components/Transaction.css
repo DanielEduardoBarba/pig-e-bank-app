@@ -1,0 +1,13 @@
+.transaction {
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    margin: 5px;
+    background-color: lightblue;
+    border-radius: 10px;
+    width: 300px;
+}
+
+.transaction>p {
+    margin: 5px;
+}
