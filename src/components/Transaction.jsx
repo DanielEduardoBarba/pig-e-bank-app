@@ -1,5 +1,3 @@
-import "./Transaction.css"
-
 export default function Transaction({TX}){
     
     return(

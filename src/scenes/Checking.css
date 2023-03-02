@@ -1,6 +1,36 @@
 .transactionlist{
     background-color: lightgoldenrodyellow;
-    width: fit-content;
+    width: 300px;
     border-radius: 20px;
+    height: 300px;
     padding: 20px;
+    overflow-inline:scroll;
+    overflow-y: scroll;
+    overflow-x: auto;
+}
+
+.transaction {
+    display: flex;
+    justify-content: right;
+    flex-direction: row;
+    margin: 5px;
+    background-color: lightblue;
+    border-radius: 10px;
+
+  
+  }
+  
+  .transaction>p {
+    margin: 5px;
+    padding:10px
+  }
+
+.AccountInfo{
+    padding:20px;
+    background-color: wheat;
+
+}
+
+div{
+   
 }

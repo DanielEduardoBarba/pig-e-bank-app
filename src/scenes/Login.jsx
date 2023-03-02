@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app"
 import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth"
 import { useEffect } from "react";
-import { MAIN_URL } from "../URLs";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAe9lxdSMCdjXCd6z9C2Ln3eABwVyFlLD8",
@@ -11,8 +10,6 @@ const firebaseConfig = {
     messagingSenderId: "363998592448",
     appId: "1:363998592448:web:82f0bd653d9105a19a9c25"
   };
-
-
 
   const handleLogin = (setUserID) =>{
     const app = initializeApp(firebaseConfig)
