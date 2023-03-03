@@ -56,7 +56,9 @@ export default function Modal({setModal}) {
 
     return (
         <>
-            <div className='blurr-background' onClick={()=>setModal(0)}/>
+            <div className='blurr-background' onClick={()=>{
+                setModal(0)
+                }}/>
             <div className="Modal">
                 <h3>{error || "Add Transaction"}</h3>
                 <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransaction(e)}>

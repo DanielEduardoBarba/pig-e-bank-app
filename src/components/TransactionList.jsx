@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 
 export default function Transactionlist({setModal,modal}) {
     const [transactions, setTransactions] = useState([])
+    const [lastAmount, setLastAmount] = useState(1)
     
     useEffect(() => {
 
@@ -17,15 +18,13 @@ export default function Transactionlist({setModal,modal}) {
     }, [modal])
 
 
-   
-
     return (
         <>
             <div className="transactionlist">
                 <div>
                 {
-                    transactions.map(TX => (
-                        <Transaction key={TX.transID} TX={TX} />
+                    transactions.map((TX,index) => (
+                        <Transaction key={TX.transID} TX={TX} index={index} transactions={transactions} lastAmount={lastAmount} setLastAmount={setLastAmount}/>
                     ))
                 }
                 </div>
