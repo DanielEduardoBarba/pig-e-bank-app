@@ -2,9 +2,9 @@
   background-color: pink;
   display: flex;
   flex-direction:column;
-  justify-items: right;
+
   height: 100vh;
-  position: relative;
+
 }
 
 .Footer{
@@ -17,3 +17,5 @@ justify-content: center;
 background-color: rgb(241, 155, 169);
 
 }
+
+
