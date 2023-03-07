@@ -1,10 +1,11 @@
 import { useState,useEffect } from "react"
 import { API_URL } from "../URLs"
 import Chore from "./Chore"
+import ChoresProgressBar from "./ChoresProgressBar"
 
 
 
-export default function ChoresList({ setMarkComplete}){
+export default function ChoresList({markComplete, setMarkComplete}){
     const [chores, setChores] = useState()
     
     useEffect(()=>{
@@ -18,7 +19,7 @@ export default function ChoresList({ setMarkComplete}){
 
         })
         .catch(console.error)
-    },[setMarkComplete])
+    },[markComplete])
     return(
         <>
         <div className="choreslist">
@@ -27,7 +28,8 @@ export default function ChoresList({ setMarkComplete}){
                 ?chores.map(CH=> <Chore key={CH.choreID} CH={CH} setMarkComplete={setMarkComplete}/> )
                 :""
             }
-        </div>
+        </div> 
+        <ChoresProgressBar chores={chores} />
         </>
     )
 }

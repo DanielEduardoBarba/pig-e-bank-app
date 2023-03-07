@@ -7,7 +7,7 @@ import "./Chores.css"
 
 export default function Checking({ userID }) {
     const [markComplete, setMarkComplete] = useState("")
-    const [balance, setBalance] = useState(0)
+  
     
 
     return (
@@ -17,8 +17,8 @@ export default function Checking({ userID }) {
                 {/* <AccountInfo balance={balance}/> */}
 
                 <ChoresList markComplete={markComplete} setMarkComplete={setMarkComplete}/>
-
             </div>
+            
             {
                 markComplete
                     ? <ChoresModal  markComplete={markComplete} setMarkComplete={setMarkComplete}/>
