@@ -1,10 +1,10 @@
 import logo from "../assets/logo.png"
 
-export default function Hero(){
+export default function Hero({tabName}){
     return(
         <>
         <div className="Hero">
-               <p>Checking account</p>
+               <p>{tabName}</p>
                <img className="logo" src={logo} />
         </div>
         </>

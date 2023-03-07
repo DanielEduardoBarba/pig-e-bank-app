@@ -4,7 +4,7 @@ import { API_URL } from "../URLs"
 
 const transactionTemplate = { amount: "", title: "", type: "" }
 
-export default function Modal({setModal}) {
+export default function TransactionModal({setModal}) {
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
@@ -59,7 +59,7 @@ export default function Modal({setModal}) {
             <div className='blurr-background' onClick={()=>{
                 setModal(0)
                 }}/>
-            <div className="Modal">
+            <div className="ChoresModal">
                 <h3>{error || "Add Transaction"}</h3>
                 <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransaction(e)}>
                     <label>Transaction Name</label>

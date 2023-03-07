@@ -1,21 +1,20 @@
-.whole-page{
+.whole-page {
   background-color: pink;
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 
   height: 100vh;
 
 }
 
-.Footer{
+.Footer {
   position: absolute;
   translate: 3vw 97vh;
 }
-.Hero{
-display: flex;
-justify-content: center;
-background-color: rgb(241, 155, 169);
+
+.Hero {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(241, 155, 169);
 
 }
-
-
