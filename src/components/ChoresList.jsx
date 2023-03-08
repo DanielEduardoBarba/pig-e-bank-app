@@ -7,6 +7,23 @@ import ChoresProgressBar from "./ChoresProgressBar"
 
 export default function ChoresList({markComplete, setMarkComplete}){
     const [chores, setChores] = useState()
+    const [bar, setBar] = useState(0)
+
+    
+    useEffect(()=>{
+        
+        try{
+           let done=0
+
+           for(let i = 0;i<chores.length;i++){
+                if(chores[i].isDone!=="false") done++
+                console.log(chores[i].isDone)
+            }
+            setBar(Math.floor((done/chores.length)*100))
+           
+       } catch{}
+        
+    },[chores])
     
     useEffect(()=>{
 
@@ -29,7 +46,7 @@ export default function ChoresList({markComplete, setMarkComplete}){
                 :""
             }
         </div> 
-        <ChoresProgressBar chores={chores} />
+        <ChoresProgressBar bar={bar} chores={chores} />
         </>
     )
 }
