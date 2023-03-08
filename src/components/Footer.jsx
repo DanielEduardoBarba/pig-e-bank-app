@@ -7,6 +7,7 @@ export default function Footer(){
         <footer className="Footer">
         <small>@{new Date().getFullYear()} Daniel Barba, All Rights Reserved</small>
         </footer>
+        
         </>
     )
 }

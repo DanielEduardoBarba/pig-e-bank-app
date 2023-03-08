@@ -2,14 +2,14 @@
   background-color: pink;
   display: flex;
   flex-direction: column;
-
+position: relative;
   height: 100vh;
 
 }
 
 .Footer {
   position: absolute;
-  translate: 3vw 97vh;
+  translate: 3vw 96vh;
 }
 
 .Hero {

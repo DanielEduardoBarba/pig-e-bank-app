@@ -19,7 +19,7 @@ function App() {
     <>
       <UserProvider.Provider value={{ userID, setUserID, childID, setChildID }}>
         <div className='whole-page'>
-          <Hero tabName={tabName[tab]} />
+          <Hero tabName={tabName[tab]} setTab={setTab} />
           {
             !userID
               ? <Login setUserID={setUserID} />
@@ -30,6 +30,7 @@ function App() {
                   : ""
           }
           <Footer />
+          
         </div>
       </UserProvider.Provider>
     </>
