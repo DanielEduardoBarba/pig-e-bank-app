@@ -4,7 +4,6 @@ let enteredPin = 0
 
 export default function AdminPin({ setError, markForAdmin,pin, setPin, setAdminPin }) {
 
-    let pinForm = document.getElementById("pin").style
 
 const checkPin = () =>{
     fetch(`${API_URL}/findpin/${markForAdmin.userID}/${markForAdmin.childID}`)
@@ -16,7 +15,7 @@ const checkPin = () =>{
         }
         else{
             setError("Pin Not Correct!")
-                pinForm.backgroundColor = "yellow"
+            document.getElementById("pin").style.backgroundColor = "yellow"
         }
     })
 }

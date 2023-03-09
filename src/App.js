@@ -8,23 +8,24 @@ import Chores from './scenes/Chores';
 
 export const UserProvider = createContext(null)
 
-const tabName = ['Checking Account', 'Chores']
+const tabName = ['Checking Account', 'Chores', 'Savings Account']
 
 function App() {
   const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
   const [childID, setChildID] = useState("billthekiddo")
+  const [account, setAccount] = useState("checking")
   const [tab, setTab] = useState(0)
   
   return (
     <>
       <UserProvider.Provider value={{ userID, setUserID, childID, setChildID }}>
         <div className='whole-page'>
-          <Hero tabName={tabName[tab]} setTab={setTab} />
+          <Hero tabName={tabName[tab]} setAccount={setAccount} setTab={setTab} />
           {
             !userID
               ? <Login setUserID={setUserID} />
               : tab == 0
-                ? <Checking userID={userID} />
+                ? <Checking account={account} setAccount={setAccount} userID={userID} />
                 : tab == 1
                   ? <Chores userID={userID} />
                   : ""

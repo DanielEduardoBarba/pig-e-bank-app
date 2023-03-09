@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { API_URL } from "../URLs"
 import Chore from "./Chore"
 import ChoresProgressBar from "./ChoresProgressBar"
-
-
+import { UserProvider } from "../App"
 
 export default function ChoresList({ markComplete, setMarkComplete }) {
     const [chores, setChores] = useState()
     const [bar, setBar] = useState(0)
-
+    const{userID, childID} = useContext(UserProvider)
 
     useEffect(() => {
 
@@ -26,7 +25,7 @@ export default function ChoresList({ markComplete, setMarkComplete }) {
 
     useEffect(() => {
 
-        fetch(`${API_URL}/chores`)
+        fetch(`${API_URL}/chores/${userID}/${childID}`)
             .then(incoming => incoming.json())
             .then(data => {
 

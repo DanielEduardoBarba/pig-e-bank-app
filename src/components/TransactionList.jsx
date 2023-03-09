@@ -1,13 +1,15 @@
 import Transaction from "../components/Transaction"
 import { API_URL } from "../URLs"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+import { UserProvider } from "../App"
 
-export default function Transactionlist({ setModal, modal, setBalance, setMarkForAdmin }) {
+export default function Transactionlist({account, setModal, modal, setBalance, setMarkForAdmin }) {
+   const{userID, childID} = useContext(UserProvider)
     const [transactions, setTransactions] = useState([])
 
     useEffect(() => {
 
-        fetch(`${API_URL}/transactions`)
+        fetch(`${API_URL}/transactions/${userID}/${childID}/${account}`)
             .then(incoming => incoming.json())
             .then(data => {
                 
@@ -23,21 +25,21 @@ export default function Transactionlist({ setModal, modal, setBalance, setMarkFo
         let approved = []
         let pending = []
         for (let i = 0; i < data.length; i++) {
-            try{
+            
                 if(data[i].isPending=="false"){
-
-                         data[i].currentBalance=Number(data[i].amount)
-                         if(data[i - 1].currentBalance){
-                              data[i].currentBalance = (Number(data[i].amount) + Number(data[i - 1].currentBalance)).toFixed(2)
-                          }
-                          approved.push(data[i])
-                }
-                else pending.push(data[i])
-              if(i == data.length-1) setBalance(data[i].currentBalance)
-            }
-            catch{
-
-            }
+                    data[i].currentBalance=Number(data[i].amount)
+                        try{
+                            if(data[i - 1].currentBalance){
+                                data[i].currentBalance = (Number(data[i].amount) + Number(data[i - 1].currentBalance)).toFixed(2)
+                            }
+                            }
+                            catch{ }
+                            approved.push(data[i])
+                    }
+                    else pending.push(data[i])
+                if(i == data.length-1) setBalance(data[i].currentBalance)
+            
+        
         }
         return [...approved, ...pending]
     }
@@ -45,14 +47,14 @@ export default function Transactionlist({ setModal, modal, setBalance, setMarkFo
     return (
         <>
             <div className="transactionlist">
+                    <button onClick={() => setModal(1)} className="add-transaction"> Add Transaction</button>
                 <div>
                     {
-                        transactions.map((TX) => (
+                        transactions.slice(0).reverse().map((TX) => (
                             <Transaction key={TX.transID} TX={TX} setMarkForAdmin={setMarkForAdmin} />
                         ))
                     }
                 </div>
-                <button onClick={() => setModal(1)} className="add-transaction"> Add Transaction</button>
             </div>
         </>
     )

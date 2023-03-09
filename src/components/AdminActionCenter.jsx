@@ -8,6 +8,9 @@ export default function AdminActionCenter({ markForAdmin, setMarkForAdmin, setEr
     useEffect(()=>{
         document.getElementById("title").value=markForAdmin.title
         document.getElementById("amount").value=markForAdmin.amount
+
+        markForAdmin.action=""
+        setMarkForAdmin(markForAdmin)
     },[])
      
     const submitWithPin = (e) => {
@@ -19,10 +22,11 @@ export default function AdminActionCenter({ markForAdmin, setMarkForAdmin, setEr
             .then(response => {
                 if (response[0].childID == markForAdmin.childID &&
                     response[0].userID == markForAdmin.userID &&
+                    markForAdmin.action &&
                     response[0].adminPin == pin) {
 
                     //NEED TO MAKE THIS ROUTE
-                    if(markForAdmin.isPending=="remove") fetch(`${API_URL}/transactions`, {
+                    if(markForAdmin.action=="remove") fetch(`${API_URL}/transactions`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json"
@@ -31,9 +35,8 @@ export default function AdminActionCenter({ markForAdmin, setMarkForAdmin, setEr
                     })
                         .then(incoming => incoming.json())
                         .then(response => {
-
+                            console.log(response)
                             if (response.serverStatus == 2) {
-                                setMarkForAdmin("")
                                 document.getElementById("admin-form").reset()
                                 setMarkForAdmin("")
                             }
@@ -69,8 +72,12 @@ export default function AdminActionCenter({ markForAdmin, setMarkForAdmin, setEr
                     }} />
 
                 <select name="action" id="action" onChange={e => {
-                    if (e.target.value == "approve") markForAdmin.isPending = "false"
-                    if (e.target.value == "remove") markForAdmin.isPending = "remove"
+                    if (e.target.value == "") markForAdmin.action = ""
+                    if (e.target.value == "approve"){
+                        markForAdmin.isPending = "false"
+                        markForAdmin.action = "false"
+                    }
+                    if (e.target.value == "remove") markForAdmin.action = "remove"
                     setMarkForAdmin(markForAdmin)
                 }}>
                     <option value="">Select Action</option>

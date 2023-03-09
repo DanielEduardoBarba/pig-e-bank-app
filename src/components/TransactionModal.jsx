@@ -4,7 +4,7 @@ import { API_URL } from "../URLs"
 
 const transactionTemplate = { amount: "", title: "", type: "" }
 
-export default function TransactionModal({setModal}) {
+export default function TransactionModal({account,setModal}) {
 
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
@@ -21,6 +21,7 @@ export default function TransactionModal({setModal}) {
             console.log(newTransaction )
             newTransaction.childID=childID
             newTransaction.userID=userID
+            newTransaction.account=account
             
             if(newTransaction.type=="debit"){
                 newTransaction.isPending="false"
@@ -66,7 +67,7 @@ export default function TransactionModal({setModal}) {
             <div className='blurr-background' onClick={()=>{
                 setModal(0)
                 }}/>
-            <div className="ChoresModal">
+            <div className="TransactionModal">
                 <h3>{error || "Add Transaction"}</h3>
                 <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransaction(e)}>
                     <label>Transaction Name</label>
