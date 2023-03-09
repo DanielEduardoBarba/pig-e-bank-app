@@ -5,6 +5,7 @@ import { API_URL } from "../URLs"
 const transactionTemplate = { amount: "", title: "", type: "" }
 
 export default function TransactionModal({setModal}) {
+
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
@@ -20,7 +21,13 @@ export default function TransactionModal({setModal}) {
             console.log(newTransaction )
             newTransaction.childID=childID
             newTransaction.userID=userID
-            if(newTransaction.type=="debit") newTransaction.amount*=-1
+            
+            if(newTransaction.type=="debit"){
+                newTransaction.isPending="false"
+                newTransaction.amount*=-1
+            } 
+            
+
             fetch(`${API_URL}/transactions`,{
                 method:"POST",
                 headers:{

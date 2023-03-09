@@ -13,7 +13,7 @@ const tabName = ['Checking Account', 'Chores']
 function App() {
   const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
   const [childID, setChildID] = useState("billthekiddo")
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(0)
   
   return (
     <>
