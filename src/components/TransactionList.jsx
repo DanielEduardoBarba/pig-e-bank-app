@@ -3,7 +3,7 @@ import { API_URL } from "../URLs"
 import { useEffect, useState, useContext } from "react"
 import { UserProvider } from "../App"
 
-export default function Transactionlist({account, setModal, modal, setBalance, setMarkForAdmin }) {
+export default function Transactionlist({account, setModal, modal, setBalance, markForAdmin, setMarkForAdmin }) {
    const{userID, childID} = useContext(UserProvider)
     const [transactions, setTransactions] = useState([])
 
@@ -18,7 +18,7 @@ export default function Transactionlist({account, setModal, modal, setBalance, s
                 setTransactions(calculateAccount(data))
             })
 
-        }, [modal])
+        }, [modal, markForAdmin])
 
 
     const calculateAccount = (data) => {

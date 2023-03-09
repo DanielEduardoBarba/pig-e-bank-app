@@ -25,7 +25,7 @@ export default function AdminActionCenter({ markForAdmin, setMarkForAdmin, setEr
                     markForAdmin.action &&
                     response[0].adminPin == pin) {
 
-                    //NEED TO MAKE THIS ROUTE
+                    //REMOVE TRANSACTION routing
                     if(markForAdmin.action=="remove") fetch(`${API_URL}/transactions`, {
                         method: "DELETE",
                         headers: {
@@ -36,12 +36,29 @@ export default function AdminActionCenter({ markForAdmin, setMarkForAdmin, setEr
                         .then(incoming => incoming.json())
                         .then(response => {
                             console.log(response)
-                            if (response.serverStatus == 2) {
+                            if (markForAdmin.action=="remove" && response.serverStatus == 34) {
                                 document.getElementById("admin-form").reset()
                                 setMarkForAdmin("")
                             }
-                            else alert(response)
-
+                            else alert(response.serverStatus)
+                        })
+                        .catch(console.error)
+                //APPROVE TRANSACTION
+                    if(markForAdmin.action=="approve") fetch(`${API_URL}/transactions`, {
+                        method: "DELETE",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(markForAdmin)
+                    })
+                        .then(incoming => incoming.json())
+                        .then(response => {
+                            console.log(response)
+                            if (markForAdmin.action=="approve" && response.serverStatus == 34) {
+                                document.getElementById("admin-form").reset()
+                                setMarkForAdmin("")
+                            }
+                            else alert(response.serverStatus)
                         })
                         .catch(console.error)
                 }
@@ -75,7 +92,7 @@ export default function AdminActionCenter({ markForAdmin, setMarkForAdmin, setEr
                     if (e.target.value == "") markForAdmin.action = ""
                     if (e.target.value == "approve"){
                         markForAdmin.isPending = "false"
-                        markForAdmin.action = "false"
+                        markForAdmin.action = "approve"
                     }
                     if (e.target.value == "remove") markForAdmin.action = "remove"
                     setMarkForAdmin(markForAdmin)

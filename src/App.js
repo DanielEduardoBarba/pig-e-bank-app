@@ -5,6 +5,7 @@ import './App.css';
 import Footer from './components/Footer';
 import Hero from './components/Hero';
 import Chores from './scenes/Chores';
+import Savings from './scenes/Savings'
 
 export const UserProvider = createContext(null)
 
@@ -28,7 +29,11 @@ function App() {
                 ? <Checking account={account} setAccount={setAccount} userID={userID} />
                 : tab == 1
                   ? <Chores userID={userID} />
-                  : ""
+                  : tab==2
+                    ? <Savings account={account} setAccount={setAccount} userID={userID} />
+                    : tab==3
+                    ? <Savings account={account} setAccount={setAccount} userID={userID} />
+                    :""
           }
           <Footer />
           
