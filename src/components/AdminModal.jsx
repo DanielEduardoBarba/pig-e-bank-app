@@ -5,7 +5,7 @@ import AdminPin from "./AdminPin"
 
 
 
-export default function AdminModal({ markForAdmin, setMarkForAdmin }) {
+export default function AdminModal({account, markForAdmin, setMarkForAdmin }) {
     const [error, setError] = useState("")
     const [pin, setPin] = useState(0)
     const [adminPin, setAdminPin] = useState(0)
@@ -21,7 +21,7 @@ export default function AdminModal({ markForAdmin, setMarkForAdmin }) {
                 <h3>{error || "ADMIN"}</h3>
                 {
                 pin==adminPin && adminPin
-                ?<AdminActionCenter pin={pin} setError={setError} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                ?<AdminActionCenter account={account} pin={pin} setError={setError} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
                 :<AdminPin setError={setError} setAdminPin={setAdminPin} pin={pin} setPin={setPin} markForAdmin={markForAdmin}/>
                 }
 

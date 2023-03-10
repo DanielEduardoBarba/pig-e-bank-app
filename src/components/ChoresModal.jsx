@@ -21,36 +21,32 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
             .then(response => {
                 if (response[0].childID == markComplete.childID &&
                     response[0].userID == markComplete.userID &&
+                    markComplete.action &&
                     response[0].pin == pin) {
 
-                    const markChore = { ...markComplete }
-                    markChore.where = `choreID=${markComplete.choreID}`
-                    markChore.set = `isDone="true"`
-
+                  
                     fetch(`${API_URL}/chores`, {
                         method: "PATCH",
                         headers: {
                             "Content-Type": "application/json"
                         },
-                        body: JSON.stringify(markChore)
+                        body: JSON.stringify(markComplete)
                     })
                         .then(incoming => incoming.json())
                         .then(response => {
 
-                            if (response.serverStatus == 2) {
-                                setMarkComplete("")
+                            if (response.serverStatus == 2 && markComplete.action=="done") {
                                 document.getElementById("chores-form").reset()
                                 setMarkComplete("")
                             }
-                            else alert(response)
+                            else if (response.serverStatus == 34 && markComplete.action=="pending") {
+                                document.getElementById("chores-form").reset()
+                                setMarkComplete("")
+                            }
+                            else alert("You alread marked this as done")
 
                         })
                         .catch(console.error)
-
-
-
-
-
                 }
                 else {
                     pinForm.backgroundColor = "yellow"
@@ -58,14 +54,7 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                 }
             })
             .catch(console.error)
-
-
-
     }
-
-
-
-
 
 
 
@@ -82,6 +71,17 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                     <p style={{ fontWeight: "900", backgroundColor: "orange" }}>
                         {markComplete.title}</p>
 
+                    <select name="action" id="action" onChange={e => {
+                    if (e.target.value == "") markComplete.action = ""
+                    if (e.target.value == "done") markComplete.action = "done"
+                    if (e.target.value == "pending") markComplete.action = "pending"
+                    setMarkComplete(markComplete)
+                }}>
+                    <option value="">Select Action</option>
+                    <option value="done">Done</option>
+                    <option value="pending">Not Done</option>
+                </select>
+
                     <label>Confirm with your pin</label>
 
                     <input name="pin" id="pin" placeholder="pin"
@@ -93,7 +93,8 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                             else document.getElementById("pin").value = e.target.value.substring(0, e.target.value.length - 1)
                         }} />
 
-                    <button>I'm Done!</button>
+                    <button>Mark Chore</button>
+                   
                 </form>
 
             </div>

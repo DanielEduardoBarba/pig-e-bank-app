@@ -18,7 +18,6 @@ export default function TransactionModal({account,setModal}) {
         let titleAlert = document.getElementById("title").style 
 
         if (newTransaction.type && newTransaction.title && newTransaction.amount) {
-            console.log(newTransaction )
             newTransaction.childID=childID
             newTransaction.userID=userID
             newTransaction.account=account
@@ -28,7 +27,8 @@ export default function TransactionModal({account,setModal}) {
                 newTransaction.amount*=-1
             } 
             
-
+            
+            console.log(newTransaction )
             fetch(`${API_URL}/transactions`,{
                 method:"POST",
                 headers:{

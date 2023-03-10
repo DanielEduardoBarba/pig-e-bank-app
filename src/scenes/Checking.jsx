@@ -4,6 +4,7 @@ import "./Checking.css"
 import TransactionList from "../components/TransactionList"
 import TransactionModal from "../components/TransactionModal"
 import AdminModal from "../components/AdminModal"
+import { toast } from "react-toastify"
 
 export default function Checking({ account, setAccount,userID }) {
     const [modal, setModal] = useState(0)
@@ -23,9 +24,9 @@ export default function Checking({ account, setAccount,userID }) {
             </div>
             {
                 modal==1
-                    ? <TransactionModal account={account} setModal={setModal}/>
+                    ?<TransactionModal account={account} setModal={setModal}/>
                     : markForAdmin
-                        ? <AdminModal markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                        ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
                         : ""
             }
         </>

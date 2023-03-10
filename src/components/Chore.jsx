@@ -15,13 +15,15 @@ export default function Chore({CH, setMarkComplete}){
 
     return(
         <>
-        <div style={{opacity:CH.isDone=="true"?"0.4":"1"}} className="chore">
+        <div style={{opacity:CH.isDone!=="false"?"0.4":"1"}} className="chore">
 
             <p>CHORE ITEM</p>
             <p>{CH.title}</p>
             <p>Payout: ${CH.amount}</p>
             {/* <p>{CH.isDone}</p> */}
-            <button onClick={()=>setMarkComplete(CH)}>DONE</button>
+            <button 
+            //style={{pointerEvents: CH.isDone!=="false"?"none":"all"}} 
+            onClick={()=>setMarkComplete(CH)}>DONE</button>
         </div>
        
         </>

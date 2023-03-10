@@ -25,7 +25,7 @@ export default function Savings({ account, setAccount,userID }) {
                 modal==1
                     ? <TransactionModal account={account} setModal={setModal}/>
                     : markForAdmin
-                        ? <AdminModal markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                        ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
                         : ""
             }
         </>
