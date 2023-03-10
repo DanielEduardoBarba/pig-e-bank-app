@@ -5,7 +5,7 @@ export default function Hero({tabName, setTab, setAccount}){
         <>
         <div className="Hero">
                <p>{tabName}</p>
-               
+
                <button onClick={()=>{
                 setTab(0)
                 setAccount("checking")
@@ -17,6 +17,11 @@ export default function Hero({tabName, setTab, setAccount}){
                 setTab(2)
                 setAccount("savings")
                 }}>Savings</button>
+
+               <button onClick={()=>{
+                setTab(3)
+                setAccount("credit")
+                }}>Credit</button>
 
                <img className="logo" src={logo} />
         </div>
