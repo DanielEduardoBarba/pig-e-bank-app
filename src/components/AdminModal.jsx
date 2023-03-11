@@ -21,8 +21,8 @@ export default function AdminModal({account, markForAdmin, setMarkForAdmin }) {
                 <h3>{error || "ADMIN"}</h3>
                 {
                 pin==adminPin && adminPin
-                ?<AdminActionCenter account={account} pin={pin} setError={setError} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
-                :<AdminPin setError={setError} setAdminPin={setAdminPin} pin={pin} setPin={setPin} markForAdmin={markForAdmin}/>
+                    ?<AdminActionCenter account={account} pin={pin} setError={setError} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                    :<AdminPin setError={setError} setAdminPin={setAdminPin} pin={pin} setPin={setPin} markForAdmin={markForAdmin}/>
                 }
 
             </div>

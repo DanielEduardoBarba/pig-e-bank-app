@@ -13,8 +13,10 @@ export const UserProvider = createContext(null)
 const tabName = ['Checking Account', 'Chores', 'Savings Account', 'Credit']
 
 function App() {
-  const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
+  // const [childID, setChildID] = useState("")
+  // const [userID, setUserID] = useState("")
   const [childID, setChildID] = useState("billthekiddo")
+  const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
   const [account, setAccount] = useState("checking")
   const [tab, setTab] = useState(0)
   
@@ -24,12 +26,12 @@ function App() {
         <div className='whole-page'>
           <Hero tabName={tabName[tab]} setAccount={setAccount} setTab={setTab} />
           {
-            !userID
-              ? <Login setUserID={setUserID} />
+            !userID || !childID
+              ? <Login userID={userID} setUserID={setUserID} childID={childID} setChildID={setChildID}/>
               : tab == 0
                 ? <Checking account={account} setAccount={setAccount} userID={userID} />
                 : tab == 1
-                  ? <Chores userID={userID} />
+                  ? <Chores account={account} setAccount={setAccount} userID={userID} />
                   : tab==2
                     ? <Savings account={account} setAccount={setAccount} userID={userID} />
                     : tab==3

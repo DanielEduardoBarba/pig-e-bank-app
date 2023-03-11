@@ -11,7 +11,10 @@ export default function Hero({tabName, setTab, setAccount}){
                 setAccount("checking")
                 }}>Checking</button>
 
-               <button onClick={()=>{setTab(1)}}>Chores</button>
+               <button onClick={()=>{
+                setTab(1)
+                setAccount("chores")
+                }}>Chores</button>
 
                <button onClick={()=>{
                 setTab(2)

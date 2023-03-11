@@ -4,18 +4,18 @@ import { UserProvider } from "../App"
 
 let enteredPin = 0
 
-export default function AdminActionCenter({account, markForAdmin, setMarkForAdmin, setError, pin }) {
+export default function AdminActionCenter({ account, markForAdmin, setMarkForAdmin, setError, pin }) {
 
-    const {userID,childID} = useContext(UserProvider)
+    const { userID, childID } = useContext(UserProvider)
 
-    useEffect(()=>{
-        document.getElementById("title").value=markForAdmin.title
-        document.getElementById("amount").value=markForAdmin.amount
+    useEffect(() => {
+        document.getElementById("title").value = markForAdmin.title
+        document.getElementById("amount").value = markForAdmin.amount
 
-        markForAdmin.action=""
+        markForAdmin.action = ""
         setMarkForAdmin(markForAdmin)
-    },[])
-     
+    }, [])
+
     const submitWithPin = (e) => {
 
         e.preventDefault()
@@ -27,9 +27,12 @@ export default function AdminActionCenter({account, markForAdmin, setMarkForAdmi
                     response[0].userID == markForAdmin.userID &&
                     markForAdmin.action &&
                     response[0].adminPin == pin) {
+                    let routing = ""
+                    if (account == "checking" || account == "savings" || account == "credit") routing = "transactions"
+                    if (account == "chores") routing = "chores"
 
                     //REMOVE TRANSACTION routing
-                    if(markForAdmin.action=="remove") fetch(`${API_URL}/transactions`, {
+                    if (markForAdmin.action == "remove") fetch(`${API_URL}/${routing}`, {
                         method: "DELETE",
                         headers: {
                             "Content-Type": "application/json"
@@ -39,7 +42,7 @@ export default function AdminActionCenter({account, markForAdmin, setMarkForAdmi
                         .then(incoming => incoming.json())
                         .then(response => {
                             console.log(response)
-                            if (markForAdmin.action=="remove" && response.serverStatus == 34) {
+                            if (markForAdmin.action == "remove" && response.serverStatus == 34) {
                                 document.getElementById("admin-form").reset()
                                 setMarkForAdmin("")
                             }
@@ -47,11 +50,12 @@ export default function AdminActionCenter({account, markForAdmin, setMarkForAdmi
                         })
                         .catch(console.error)
 
-                //APPROVE TRANSACTION routing
-                console.log(markForAdmin.action)
-                    if(markForAdmin.action=="approve" || markForAdmin.action=="pending"){
-                        console.log("You just fetched: "+`${API_URL}/transactions/${userID}/${childID}/${account}`)
-                        fetch(`${API_URL}/transactions/${userID}/${childID}/${account}`, {
+                    //APPROVE TRANSACTION routing
+                    //console.log(markForAdmin.action)
+                    //console.log("You just fetched: "+`${API_URL}/${routing}/${userID}/${childID}/${account}`)
+
+                    if (markForAdmin.action == "approve" || markForAdmin.action == "pending") {
+                        fetch(`${API_URL}/${routing}/${userID}/${childID}/${account}`, {
                             method: "PATCH",
                             headers: {
                                 "Content-Type": "application/json"
@@ -62,8 +66,8 @@ export default function AdminActionCenter({account, markForAdmin, setMarkForAdmi
                             .then(response => {
                                 console.log(response)
                                 console.log(markForAdmin)
-                                if (( markForAdmin.action=="approve" || markForAdmin.action=="pending" )
-                                 && response.serverStatus == 34) {
+                                if ((markForAdmin.action == "approve" || markForAdmin.action == "pending")
+                                    && response.serverStatus == 34) {
                                     document.getElementById("admin-form").reset()
                                     setMarkForAdmin("")
                                 }
@@ -83,7 +87,7 @@ export default function AdminActionCenter({account, markForAdmin, setMarkForAdmi
     return (
         <>
             <form id="admin-form" className="admin-form" onSubmit={e => submitWithPin(e)}>
-                <p>Transaction: {markForAdmin.transID}</p>
+                <p>ID: {markForAdmin.transID || "N/A"}</p>
                 <label>Title</label>
                 <input name="title" id="title" placeholder="title"
                     onChange={e => {
@@ -106,8 +110,8 @@ export default function AdminActionCenter({account, markForAdmin, setMarkForAdmi
                     setMarkForAdmin(markForAdmin)
                 }}>
                     <option value="">Select Action</option>
-                    <option value="approve">Approve</option>
-                    <option value="pending">Pending</option>
+                    {account!=="chores"?<option value="approve">Approve</option>:""}
+                    {account!=="chores"?<option value="pending">Pending</option>:""}
                     <option value="remove">Remove</option>
                 </select>
 

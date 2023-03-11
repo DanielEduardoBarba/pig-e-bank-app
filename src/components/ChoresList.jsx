@@ -4,7 +4,7 @@ import Chore from "./Chore"
 import ChoresProgressBar from "./ChoresProgressBar"
 import { UserProvider } from "../App"
 
-export default function ChoresList({ markComplete, setMarkComplete }) {
+export default function ChoresList({ markComplete, setMarkComplete, setMarkForAdmin }) {
     const [chores, setChores] = useState()
     const [bar, setBar] = useState(0)
     const{userID, childID} = useContext(UserProvider)
@@ -41,13 +41,18 @@ export default function ChoresList({ markComplete, setMarkComplete }) {
             <div className="choreslist">
                 {
                     chores
-                        ? chores.map(CH => <Chore key={CH.choreID} CH={CH} setMarkComplete={setMarkComplete} />)
+                        ? chores.map(CH => <Chore key={CH.choreID} CH={CH} setMarkComplete={setMarkComplete} setMarkForAdmin={setMarkForAdmin} />)
                         : ""
                 }
             </div>
             <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                 <ChoresProgressBar bar={bar} chores={chores} />
             </div>
+                <button onClick={()=>{}} className="add-chore">Add Chore</button>
+
+                {
+                    
+                 }
         </>
     )
 }

@@ -1,0 +1,43 @@
+.Login {
+    position: absolute;
+    translate: calc(50vw - 50%) calc(50vh - 50%);
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    background-color: grey;
+    padding: 30px;
+    border-radius: 50px;
+}
+
+.login-form {
+    background-color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.login-form * {
+    margin: 10px;
+    font-size: large;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+
+.google-btn {
+    background-image: url("../assets/google.jpg");
+    background-color: white;
+    height: 100px;
+    width: 100%;
+    justify-items: right;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 200% 100%;
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    border: 3px solid black;
+
+}
