@@ -4,9 +4,9 @@ import "./Checking.css"
 import TransactionList from "../components/TransactionList"
 import TransactionModal from "../components/TransactionModal"
 import AdminModal from "../components/AdminModal"
+import TransferModal from "../components/TransferModal"
 
-
-export default function Checking({ account, setAccount, userID }) {
+export default function Checking({account, setAccount, userID }) {
     const [modal, setModal] = useState(0)
     const [availableBalance, setAvailableBalance] = useState(0)
     const [pendingBalance, setPendingBalance] = useState(0)
@@ -29,9 +29,11 @@ export default function Checking({ account, setAccount, userID }) {
             {
                 modal==1
                     ?<TransactionModal account={account} setModal={setModal}/>
-                    : markForAdmin
-                        ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
-                        : ""
+                    : modal==2
+                        ?<TransferModal availableBalance={availableBalance} account={account} setModal={setModal}/>
+                        :markForAdmin
+                            ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                            : ""
             }
         </>
     )

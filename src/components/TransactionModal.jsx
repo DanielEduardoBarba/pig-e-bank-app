@@ -71,7 +71,7 @@ export default function TransactionModal({account,setModal}) {
                 }}/>
             <div className="TransactionModal">
                 <h3>{error || "Add Transaction"}</h3>
-                <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransaction(e)}>
+            <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransaction(e)}>
                     <label>Transaction Name</label>
                     <input name="title" id="title" placeholder="transaction name" onChange={e => {
                         newTransaction.title = e.target.value

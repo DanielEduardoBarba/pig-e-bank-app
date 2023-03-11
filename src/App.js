@@ -6,19 +6,19 @@ import Footer from './components/Footer';
 import Hero from './components/Hero';
 import Chores from './scenes/Chores';
 import Savings from './scenes/Savings'
-import Loans from './scenes/Loans'
+import Credit from './scenes/Credit'
 
 export const UserProvider = createContext(null)
 
 const tabName = ['Checking Account', 'Chores', 'Savings Account', 'Credit']
 
 function App() {
-  const [childID, setChildID] = useState("")
-  const [userID, setUserID] = useState("")
-  // const [childID, setChildID] = useState("billthekiddo")
-  // const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
-  const [account, setAccount] = useState("chores")
-  const [tab, setTab] = useState(1)
+  // const [childID, setChildID] = useState("")
+  // const [userID, setUserID] = useState("")
+  const [childID, setChildID] = useState("billthekiddo")
+  const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
+  const [account, setAccount] = useState("credit")
+  const [tab, setTab] = useState(3)
   
   return (
     <>
@@ -35,7 +35,7 @@ function App() {
                   : tab==2
                     ? <Savings account={account} setAccount={setAccount} userID={userID} />
                     : tab==3
-                      ? <Loans account={account} setAccount={setAccount} userID={userID} />
+                      ? <Credit account={account} setAccount={setAccount} userID={userID} />
                       :""
           }
           <Footer />

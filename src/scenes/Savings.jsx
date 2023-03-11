@@ -3,6 +3,7 @@ import AccountInfo from "../components/AccountInfo"
 import "./Savings.css"
 import TransactionList from "../components/TransactionList"
 import TransactionModal from "../components/TransactionModal"
+import TransferModal from "../components/TransferModal"
 import AdminModal from "../components/AdminModal"
 
 export default function Savings({ account, setAccount,userID }) {
@@ -28,9 +29,11 @@ export default function Savings({ account, setAccount,userID }) {
             {
                 modal==1
                     ? <TransactionModal account={account} setModal={setModal}/>
-                    : markForAdmin
-                        ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
-                        : ""
+                    : modal==2
+                        ?<TransferModal availableBalance={availableBalance} account={account} setModal={setModal}/>
+                        : markForAdmin
+                            ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                            : ""
             }
         </>
     )

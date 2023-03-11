@@ -69,7 +69,7 @@ export default function NewChildSection({setParentModal, setNewChild, setError, 
             <input style={{opacity:(childName && pin)?1:0.3,
             pointerEvents:(childName && pin)?"all":"none"}} 
             name="confirmAdminPin" id="confirmAdminPin" 
-            placeholder="confrim admin pin"
+            placeholder="confirm admin pin"
             type="password"
                 onChange={e => {
                     if (e.target.value >= 0) {

@@ -15,9 +15,9 @@ console.log(PIC_URI)
                     style={{ width: '100px', height: '100px' }}
                     src={userPic} />
                 <p>USER ID: {userID}</p>
-                <p>Available: ${availableBalance || "0.00"}</p>
-                <p>Pending: ${pendingBalance || "0.00"}</p>
-                <p>Balance: ${Number(pendingBalance)+Number(availableBalance) || "0.00"}</p>
+                <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
+                <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
+                <p>Balance: ${(Number(pendingBalance)+Number(availableBalance)).toFixed(2) || "0.00"}</p>
             </div>
         </>
     )

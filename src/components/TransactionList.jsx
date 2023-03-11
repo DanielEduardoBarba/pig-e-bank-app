@@ -36,12 +36,12 @@ export default function Transactionlist({account, setModal, modal, setAvailableB
                         }
                     }
                     catch{ }
-                    availableBalance = data[i].currentBalance
+                    availableBalance +=Number(data[i].amount)
                    // console.log(data[i].currentBalance)
                             approved.push(data[i])
                     }
                     else{
-                        pendingBalance+=Number(data[i].amount)
+                        pendingBalance += Number(data[i].amount)
                         pending.push(data[i])
                     }
 
@@ -63,7 +63,7 @@ export default function Transactionlist({account, setModal, modal, setAvailableB
                 <div>
                     {
                         transactions.slice(0).reverse().map((TX) => (
-                            <Transaction key={TX.transID} TX={TX} setMarkForAdmin={setMarkForAdmin} />
+                            <Transaction key={TX.transID} setModal={setModal} TX={TX} setMarkForAdmin={setMarkForAdmin} />
                         ))
                     }
                 </div>
