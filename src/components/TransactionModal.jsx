@@ -4,7 +4,7 @@ import { API_URL } from "../URLs"
 
 const transactionTemplate = { amount: "", title: "", type: "" }
 
-export default function TransactionModal({account,setModal}) {
+export default function TransactionModal({credit,account,setModal}) {
 
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
@@ -20,7 +20,8 @@ export default function TransactionModal({account,setModal}) {
         if (newTransaction.type && newTransaction.title && newTransaction.amount) {
             newTransaction.childID=childID
             newTransaction.userID=userID
-            newTransaction.account=account
+            if(account=="checking" || account=="savings") newTransaction.account=account
+            else newTransaction.account=credit.loanID
             
             if(newTransaction.type=="debit"){
                 newTransaction.isPending="false"
@@ -57,12 +58,7 @@ export default function TransactionModal({account,setModal}) {
             if (!newTransaction.title) titleAlert.backgroundColor="yellow"
         }
            
-
-
-        
     }
-
-
 
     return (
         <>

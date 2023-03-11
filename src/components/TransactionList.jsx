@@ -3,7 +3,7 @@ import { API_URL } from "../URLs"
 import { useEffect, useState, useContext } from "react"
 import { UserProvider } from "../App"
 
-export default function Transactionlist({account, setModal, modal, setAvailableBalance,setPendingBalance, markForAdmin, setMarkForAdmin }) {
+export default function Transactionlist({credit, account, setModal, modal, setAvailableBalance,setPendingBalance, setMarkForCredit, markForAdmin, setMarkForAdmin }) {
    const{userID, childID} = useContext(UserProvider)
     const [transactions, setTransactions] = useState([])
 
@@ -17,7 +17,7 @@ export default function Transactionlist({account, setModal, modal, setAvailableB
                 console.log(calculateAccount(data))
                 setTransactions(calculateAccount(data))
             })
-
+            .catch(console.error)
         }, [modal, markForAdmin])
 
 
@@ -26,6 +26,7 @@ export default function Transactionlist({account, setModal, modal, setAvailableB
         let pending = []
         let pendingBalance=0
         let availableBalance=0
+        if(account=="credit") availableBalance=credit.amount
         for (let i = 0; i < data.length; i++) {
             
                 if(data[i].isPending=="false"){
@@ -59,7 +60,12 @@ export default function Transactionlist({account, setModal, modal, setAvailableB
     return (
         <>
             <div className="transactionlist">
-                    <button onClick={() => setModal(1)} className="add-transaction"> Add Transaction</button>
+                    <button onClick={() =>{
+                        //console.log("HI")
+                        // setMarkForCredit(credit)
+                         setModal(1)
+                         console.log(modal)
+                    }} className="add-transaction"> Add Transaction</button>
                 <div>
                     {
                         transactions.slice(0).reverse().map((TX) => (
