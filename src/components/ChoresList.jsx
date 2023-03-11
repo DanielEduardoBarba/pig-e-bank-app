@@ -4,7 +4,7 @@ import Chore from "./Chore"
 import ChoresProgressBar from "./ChoresProgressBar"
 import { UserProvider } from "../App"
 
-export default function ChoresList({ markComplete, setMarkComplete, setMarkForAdmin }) {
+export default function ChoresList({ modal, setModal, markComplete, setMarkComplete, markForAdmin, setMarkForAdmin }) {
     const [chores, setChores] = useState()
     const [bar, setBar] = useState(0)
     const{userID, childID} = useContext(UserProvider)
@@ -34,7 +34,8 @@ export default function ChoresList({ markComplete, setMarkComplete, setMarkForAd
 
             })
             .catch(console.error)
-    }, [markComplete])
+    }, [modal, markComplete, markForAdmin])
+
 
     return (
         <>
@@ -48,7 +49,9 @@ export default function ChoresList({ markComplete, setMarkComplete, setMarkForAd
             <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                 <ChoresProgressBar bar={bar} chores={chores} />
             </div>
-                <button onClick={()=>{}} className="add-chore">Add Chore</button>
+                <button onClick={()=>{
+                   setModal(1)
+                }} className="add-chore">Add Chore</button>
 
                 {
                     

@@ -17,8 +17,8 @@ function App() {
   // const [userID, setUserID] = useState("")
   const [childID, setChildID] = useState("billthekiddo")
   const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
-  const [account, setAccount] = useState("checking")
-  const [tab, setTab] = useState(0)
+  const [account, setAccount] = useState("chores")
+  const [tab, setTab] = useState(1)
   
   return (
     <>
@@ -35,8 +35,8 @@ function App() {
                   : tab==2
                     ? <Savings account={account} setAccount={setAccount} userID={userID} />
                     : tab==3
-                    ? <Loans account={account} setAccount={setAccount} userID={userID} />
-                    :""
+                      ? <Loans account={account} setAccount={setAccount} userID={userID} />
+                      :""
           }
           <Footer />
           

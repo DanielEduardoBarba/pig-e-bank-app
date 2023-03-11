@@ -1,100 +1,85 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext} from "react"
 import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
 
-let enteredPin = 0
+const choreTemplate = { amount: "", title: "", type: "" }
 
+export default function ChoresModal({account,setModal}) {
 
-export default function ChoresModal({ markComplete, setMarkComplete }) {
     const { userID, childID } = useContext(UserProvider)
-    const [pin, setPin] = useState(0)
+    const [newChore, setNewChore] = useState(choreTemplate)
     const [error, setError] = useState("")
 
-    const submitWithPin = (e) => {
 
+    const submitChore = (e) => {
         e.preventDefault()
-        let pinForm = document.getElementById("pin").style
+        let amountAlert = document.getElementById("amount").style
+        let titleAlert = document.getElementById("title").style 
 
-
-        fetch(`${API_URL}/findpin/${markComplete.userID}/${markComplete.childID}`)
-            .then(incoming => incoming.json())
-            .then(response => {
-                if (response[0].childID == markComplete.childID &&
-                    response[0].userID == markComplete.userID &&
-                    markComplete.action &&
-                    response[0].pin == pin) {
-
-                  
-                    fetch(`${API_URL}/chores`, {
-                        method: "PATCH",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(markComplete)
-                    })
-                        .then(incoming => incoming.json())
-                        .then(response => {
-
-                            if (response.serverStatus == 2 && markComplete.action=="done") {
-                                document.getElementById("chores-form").reset()
-                                setMarkComplete("")
-                            }
-                            else if (response.serverStatus == 34 && markComplete.action=="pending") {
-                                document.getElementById("chores-form").reset()
-                                setMarkComplete("")
-                            }
-                            else alert("You alread marked this as done")
-
-                        })
-                        .catch(console.error)
-                }
-                else {
-                    pinForm.backgroundColor = "yellow"
-                    setError("Please enter correct pin!")
-                }
+        if ( newChore.title && newChore.amount) {
+            newChore.childID=childID
+            newChore.userID=userID
+            newChore.isDone="false"
+            
+            console.log(newChore)
+            fetch(`${API_URL}/chores`,{
+                method:"POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(newChore)
             })
-            .catch(console.error)
+            .then(incoming=>incoming.json())
+            .then(response=>{
+                console.log(response)
+                if(response.serverStatus==2){
+                    document.getElementById("chore-form").reset()
+                    setModal(0)
+                } 
+                else setError("Server failed :( try again...")
+                    
+             })
+             .catch(console.error)
+        
+        }
+        else { 
+            if (!newChore.amount) amountAlert.backgroundColor="yellow"
+            if (!newChore.title) titleAlert.backgroundColor="yellow"
+        }
+           
+
+
+        
     }
 
 
 
     return (
         <>
-            <div className='blurr-background' onClick={() => {
-                setMarkComplete("")
-            }} />
+            <div className='blurr-background' onClick={()=>{
+                setModal(0)
+                console.log(0)
+                }}/>
             <div className="ChoresModal">
-                <h3>{error || "Confirm Task is Done!"}</h3>
-                <form id="chores-form" className="chores-form" onSubmit={e => submitWithPin(e)}>
+                <h3>{error || "Add Chore"}</h3>
+                <form id="chore-form" className="chore-form" onSubmit={e =>submitChore(e)}>
+                    <label>Chore Name</label>
+                    <input name="title" id="title" placeholder="chore name" onChange={e => {
+                        newChore.title = e.target.value
+                        setNewChore(newChore)
+                    }} />
 
-                    <p>Did you complete the task:</p>
-                    <p style={{ fontWeight: "900", backgroundColor: "orange" }}>
-                        {markComplete.title}</p>
-
-                    <select name="action" id="action" onChange={e => {
-                    if (e.target.value == "") markComplete.action = ""
-                    if (e.target.value == "done") markComplete.action = "done"
-                    if (e.target.value == "pending") markComplete.action = "pending"
-                    setMarkComplete(markComplete)
-                }}>
-                    <option value="">Select Action</option>
-                    <option value="done">Done</option>
-                    <option value="pending">Not Done</option>
-                </select>
-
-                    <label>Confirm with your pin</label>
-
-                    <input name="pin" id="pin" placeholder="pin"
+                    <label>$</label>
+                    <input name="amount" id="amount" placeholder="amount"
                         onChange={e => {
                             if (e.target.value >= 0) {
-                                enteredPin = e.target.value
-                                setPin(enteredPin)
+                                newChore.amount = e.target.value
+                                setNewChore(newChore)
                             }
-                            else document.getElementById("pin").value = e.target.value.substring(0, e.target.value.length - 1)
+                            else document.getElementById("amount").value = e.target.value.substring(0, e.target.value.length - 1)
                         }} />
 
-                    <button>Mark Chore</button>
-                   
+                <button>Add</button>
                 </form>
 
             </div>

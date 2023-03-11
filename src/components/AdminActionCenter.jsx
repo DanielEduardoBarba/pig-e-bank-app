@@ -31,7 +31,7 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
                     if (account == "checking" || account == "savings" || account == "credit") routing = "transactions"
                     if (account == "chores") routing = "chores"
 
-                    //REMOVE TRANSACTION routing
+                    //REMOVE routing
                     if (markForAdmin.action == "remove") fetch(`${API_URL}/${routing}`, {
                         method: "DELETE",
                         headers: {
@@ -87,7 +87,7 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
     return (
         <>
             <form id="admin-form" className="admin-form" onSubmit={e => submitWithPin(e)}>
-                <p>ID: {markForAdmin.transID || "N/A"}</p>
+                <p>ID: {markForAdmin.transID || markForAdmin.choreID || "N/A"}</p>
                 <label>Title</label>
                 <input name="title" id="title" placeholder="title"
                     onChange={e => {
@@ -110,8 +110,8 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
                     setMarkForAdmin(markForAdmin)
                 }}>
                     <option value="">Select Action</option>
-                    {account!=="chores"?<option value="approve">Approve</option>:""}
-                    {account!=="chores"?<option value="pending">Pending</option>:""}
+                    {account!=="chores" && markForAdmin.isPending!="false"?<option value="approve">Approve</option>:""}
+                    {account!=="chores" && markForAdmin.isPending=="false"?<option value="pending">Pending</option>:""}
                     <option value="remove">Remove</option>
                 </select>
 

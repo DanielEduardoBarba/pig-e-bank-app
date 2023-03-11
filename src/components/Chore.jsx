@@ -7,6 +7,7 @@ export default function Chore({CH, setMarkComplete, setMarkForAdmin}){
         <div style={{opacity:CH.isDone!=="false"?"0.4":"1"}} className="chore">
 
             <p onClick={()=>{
+                CH.action="chore"
             setMarkForAdmin(CH)
             console.log(CH)
             }}>CHORE ITEM</p>
