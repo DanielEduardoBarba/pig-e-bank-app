@@ -25,7 +25,9 @@ export default function TransactionModal({account,setModal}) {
             if(newTransaction.type=="debit"){
                 newTransaction.isPending="false"
                 newTransaction.amount*=-1
-            } 
+            } else{
+                newTransaction.isPending=""
+            }
             
             
             console.log(newTransaction )

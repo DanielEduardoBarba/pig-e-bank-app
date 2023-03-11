@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 import { UserProvider } from "../App"
 
 
-export default function AcountInfo({balance}) {
+export default function AcountInfo({availableBalance, pendingBalance}) {
     const { userID } = useContext(UserProvider)
 
 
@@ -14,7 +14,8 @@ export default function AcountInfo({balance}) {
                     style={{ width: '100px', height: '100px' }}
                     src={userPic} />
                 <p>USER ID: {userID}</p>
-                <p>Balance: ${balance || "0.00"}</p>
+                <p>Balance: ${availableBalance || "0.00"}</p>
+                <p>Pending Balance: ${pendingBalance || "0.00"}</p>
             </div>
         </>
     )

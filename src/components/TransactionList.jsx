@@ -3,7 +3,7 @@ import { API_URL } from "../URLs"
 import { useEffect, useState, useContext } from "react"
 import { UserProvider } from "../App"
 
-export default function Transactionlist({account, setModal, modal, setBalance, markForAdmin, setMarkForAdmin }) {
+export default function Transactionlist({account, setModal, modal, setAvailableBalance,setPendingBalance, markForAdmin, setMarkForAdmin }) {
    const{userID, childID} = useContext(UserProvider)
     const [transactions, setTransactions] = useState([])
 
@@ -24,20 +24,32 @@ export default function Transactionlist({account, setModal, modal, setBalance, m
     const calculateAccount = (data) => {
         let approved = []
         let pending = []
+        let pendingBalance=0
+        let availableBalance=0
         for (let i = 0; i < data.length; i++) {
             
                 if(data[i].isPending=="false"){
                     data[i].currentBalance=Number(data[i].amount)
-                        try{
-                            if(data[i - 1].currentBalance){
-                                data[i].currentBalance = (Number(data[i].amount) + Number(data[i - 1].currentBalance)).toFixed(2)
-                            }
-                            }
-                            catch{ }
+                    try{
+                        if(data[i - 1].currentBalance){
+                            data[i].currentBalance = (Number(data[i].amount) + Number(data[i - 1].currentBalance)).toFixed(2)
+                        }
+                    }
+                    catch{ }
+                    availableBalance = data[i].currentBalance
+                    console.log(data[i].currentBalance)
                             approved.push(data[i])
                     }
-                    else pending.push(data[i])
-                if(i == data.length-1) setBalance(data[i].currentBalance)
+                    else{
+                        pendingBalance+=Number(data[i].amount)
+                        pending.push(data[i])
+                    }
+
+                if(i == data.length-1){
+                    console.log("BALANCE: ",availableBalance )
+                    setPendingBalance(pendingBalance)
+                    setAvailableBalance(availableBalance)
+                }
             
         
         }

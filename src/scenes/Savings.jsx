@@ -7,16 +7,20 @@ import AdminModal from "../components/AdminModal"
 
 export default function Savings({ account, setAccount,userID }) {
     const [modal, setModal] = useState(0)
-    const [balance, setBalance] = useState(0)
+    const [availableBalance, setAvailableBalance] = useState(0)
+    const [pendingBalance, setPendingBalance] = useState(0)
     const [markForAdmin, setMarkForAdmin] = useState("")
 
     return (
         <>
             <div className="Savings">
 
-                <AccountInfo balance={balance}/>
+                <AccountInfo availableBalance={availableBalance} pendingBalance={pendingBalance}/>
+
                 <TransactionList account={account} setModal={setModal} 
-                modal={modal} setBalance={setBalance} 
+                modal={modal} 
+                setAvailableBalance={setAvailableBalance} 
+                setPendingBalance={setPendingBalance}
                 markForAdmin={markForAdmin}
                 setMarkForAdmin={setMarkForAdmin}/>
 
