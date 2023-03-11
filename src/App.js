@@ -24,7 +24,7 @@ function App() {
     <>
       <UserProvider.Provider value={{ userID, setUserID, childID, setChildID }}>
         <div className='whole-page'>
-          <Hero tabName={tabName[tab]} setAccount={setAccount} setTab={setTab} />
+          <Hero tabName={tabName[tab]} setAccount={setAccount} setTab={setTab} setChildID={setChildID}/>
           {
             !userID || !childID
               ? <Login userID={userID} setUserID={setUserID} childID={childID} setChildID={setChildID}/>

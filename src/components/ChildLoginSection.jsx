@@ -27,6 +27,7 @@ export default function ChildLoginSection({ setError, children, userID, setChild
                 setCheckPin(selected[1])
                 console.log(selected)
                 }}>
+                    <option value={0}>Select Account</option>
                 {
                     children.map(child =><option key={child.ID} value={child.childID+"⌊"+child.pin}>{child.childID}</option>)
                 }

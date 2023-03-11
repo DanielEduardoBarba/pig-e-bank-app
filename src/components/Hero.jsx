@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png"
 
-export default function Hero({tabName, setTab, setAccount}){
+export default function Hero({tabName, setTab, setAccount, setChildID}){
     return(
         <>
         <div className="Hero">
@@ -26,7 +26,7 @@ export default function Hero({tabName, setTab, setAccount}){
                 setAccount("credit")
                 }}>Credit</button>
 
-               <img className="logo" src={logo} />
+               <img onClick={()=>setChildID("")} className="logo" src={logo} />
         </div>
         </>
     )
