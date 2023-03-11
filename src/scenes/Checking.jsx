@@ -4,7 +4,7 @@ import "./Checking.css"
 import TransactionList from "../components/TransactionList"
 import TransactionModal from "../components/TransactionModal"
 import AdminModal from "../components/AdminModal"
-import { toast } from "react-toastify"
+
 
 export default function Checking({ account, setAccount, userID }) {
     const [modal, setModal] = useState(0)

@@ -30,7 +30,7 @@ export default function TransactionModal({account,setModal}) {
             }
             
             
-            console.log(newTransaction )
+            console.log(newTransaction)
             fetch(`${API_URL}/transactions`,{
                 method:"POST",
                 headers:{

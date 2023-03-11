@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 import "./Login.css"
 import ChildLoginSection from "../components/ChildLoginSection";
 import { API_URL } from "../URLs";
-
+import NewChildSection from "../components/NewChildSection";
+import ParentAccountSection from "../components/ParentAccountSection";
+import logo from "../assets/logo.png"
 const firebaseConfig = {
     apiKey: "AIzaSyAe9lxdSMCdjXCd6z9C2Ln3eABwVyFlLD8",
     authDomain: "pig-e-bank-app.firebaseapp.com",
@@ -32,6 +34,8 @@ const handleLogin = (setUserID) => {
 export default function Login({ userID, setUserID, childID, setChildID }) {
     const [children, setChildren] = useState("")
     const [error, setError] = useState("")
+    const [newChild, setNewChild] = useState(0)
+    const [parentModal,setParentModal] = useState(0)
 
     useEffect(() => {
         if (localStorage.getItem("uid")) setUserID(localStorage.getItem("uid"))
@@ -42,40 +46,40 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
                 .then(incoming => incoming.json())
                 .then(data => {
                     setChildren(data)
+                    console.log(data)
                 })
                 .catch(console.error)
         }
 
-    }, [userID])
+    }, [userID, newChild, parentModal])
 
 
 
     return (
         <>
-            <div className='blurr-background' />
+            <div className='blurr-background' onClick={()=>{
+               setParentModal(0)
+               setError("Login")
+            }}/>
             <div className="Login">
-                <div className="login-form">
-
                 <p>{error || "LOGIN"}</p>
+                <div className="login-form">
                 {
-                    userID
-                        ? <button onClick={() => {
-                            localStorage.clear("uid")
-                            setUserID("")
-                        }}>Disconnect Account</button>
-                        : ""
+                    parentModal
+                    ?<ParentAccountSection handleLogin={handleLogin} userID={userID} setUserID={setUserID} setChildID={setChildID} setChildren={setChildren}/>
+                    :""
                 }
-                <button className="google-btn" onClick={() => handleLogin(setUserID)} />
-                {
-
-                    userID && children
-                        ? <ChildLoginSection setError={setError} children={children} userID={userID} setChildID={setChildID} />
-                        : ""
+                    {
+                    userID && !children.length
+                        ?<NewChildSection setParentModal={setParentModal} setNewChild={setNewChild} setError={setError} children={children} userID={userID} setChildID={setChildID}/>
+                        :userID && children
+                            ?<ChildLoginSection setError={setError} children={children} userID={userID} setChildID={setChildID} />
+                            : ""
                 }
                 </div>
-
-
+                
             </div>
+                <img className="parent-modal-btn" src={logo} onClick={()=>setParentModal(1)} />
         </>
     )
 }

@@ -37,7 +37,7 @@ export default function Transactionlist({account, setModal, modal, setAvailableB
                     }
                     catch{ }
                     availableBalance = data[i].currentBalance
-                    console.log(data[i].currentBalance)
+                   // console.log(data[i].currentBalance)
                             approved.push(data[i])
                     }
                     else{
@@ -46,7 +46,7 @@ export default function Transactionlist({account, setModal, modal, setAvailableB
                     }
 
                 if(i == data.length-1){
-                    console.log("BALANCE: ",availableBalance )
+                  //  console.log("BALANCE: ",availableBalance )
                     setPendingBalance(pendingBalance)
                     setAvailableBalance(availableBalance)
                 }

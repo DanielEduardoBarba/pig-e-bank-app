@@ -13,10 +13,10 @@ export const UserProvider = createContext(null)
 const tabName = ['Checking Account', 'Chores', 'Savings Account', 'Credit']
 
 function App() {
-  // const [childID, setChildID] = useState("")
-  // const [userID, setUserID] = useState("")
-  const [childID, setChildID] = useState("billthekiddo")
-  const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
+  const [childID, setChildID] = useState("")
+  const [userID, setUserID] = useState("")
+  // const [childID, setChildID] = useState("billthekiddo")
+  // const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
   const [account, setAccount] = useState("chores")
   const [tab, setTab] = useState(1)
   

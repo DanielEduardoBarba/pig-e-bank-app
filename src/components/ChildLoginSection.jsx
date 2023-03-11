@@ -28,7 +28,7 @@ export default function ChildLoginSection({ setError, children, userID, setChild
                 console.log(selected)
                 }}>
                 {
-                    children.map(child =><option value={child.childID+"⌊"+child.pin}>{child.childID}</option>)
+                    children.map(child =><option key={child.ID} value={child.childID+"⌊"+child.pin}>{child.childID}</option>)
                 }
             </select>
             <input name="pin" id="pin" placeholder="pin"
