@@ -1,26 +1,29 @@
 import { useState } from "react"
 import CreditInfo from "../components/CreditInfo"
 import TransactionList from "../components/TransactionList"
-export default function CreditLine({account, modal, setModal, credit, setMarkForCredit}){
+export default function CreditLine({ account, modal, setModal, credit, setMarkForCredit, markForAdmin, setMarkForAdmin }) {
     const [availableBalance, setAvailableBalance] = useState(0)
     const [pendingBalance, setPendingBalance] = useState(0)
-    const [markForAdmin, setMarkForAdmin] = useState("")
 
-    return(
+
+    return (
         <>
-        <div className="CreditLine">
-            
-        <CreditInfo credit={credit} availableBalance={availableBalance} pendingBalance={pendingBalance}/> 
+            <div className="CreditLine">
 
-         <TransactionList credit={credit} setMarkForCredit={setMarkForCredit}
-          account={account} setModal={setModal} 
-        modal={modal} 
-        setAvailableBalance={setAvailableBalance}
-        setPendingBalance={setPendingBalance}
-        markForAdmin={markForAdmin} 
-        setMarkForAdmin={setMarkForAdmin}/>
+                <CreditInfo credit={credit} availableBalance={availableBalance} pendingBalance={pendingBalance} />
 
-        </div>
+                <TransactionList
+                    credit={credit}
+                    setMarkForCredit={setMarkForCredit}
+                    account={credit.loanID}
+                    setModal={setModal}
+                    modal={modal}
+                    setAvailableBalance={setAvailableBalance}
+                    setPendingBalance={setPendingBalance}
+                    markForAdmin={markForAdmin}
+                    setMarkForAdmin={setMarkForAdmin} />
+
+            </div>
         </>
     )
 }

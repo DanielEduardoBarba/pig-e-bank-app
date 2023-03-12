@@ -26,7 +26,8 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
         let pending = []
         let pendingBalance=0
         let availableBalance=0
-        if(account=="credit") availableBalance=credit.amount
+
+        if(account!=="checking" && account!=="savings") availableBalance=Number(credit.amount)
         for (let i = 0; i < data.length; i++) {
             
                 if(data[i].isPending=="false"){
@@ -62,7 +63,7 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
             <div className="transactionlist">
                     <button onClick={() =>{
                         //console.log("HI")
-                        // setMarkForCredit(credit)
+                        setMarkForCredit(credit)
                          setModal(1)
                          console.log(modal)
                     }} className="add-transaction"> Add Transaction</button>

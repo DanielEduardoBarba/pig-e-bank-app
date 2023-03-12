@@ -4,7 +4,7 @@ import { API_URL } from "../URLs"
 
 const transactionTemplate = { amount: "", title: "", type: "" }
 
-export default function TransactionModal({credit,account,setModal}) {
+export default function TransactionModal({markForCredit, setMarkForCredit, account,setModal}) {
 
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
@@ -21,7 +21,8 @@ export default function TransactionModal({credit,account,setModal}) {
             newTransaction.childID=childID
             newTransaction.userID=userID
             if(account=="checking" || account=="savings") newTransaction.account=account
-            else newTransaction.account=credit.loanID
+            else newTransaction.account=markForCredit.loanID
+            console.log(markForCredit.loanID)
             
             if(newTransaction.type=="debit"){
                 newTransaction.isPending="false"
@@ -41,7 +42,7 @@ export default function TransactionModal({credit,account,setModal}) {
             })
             .then(incoming=>incoming.json())
             .then(response=>{
-
+                console.log(response)
                 if(response.serverStatus==2){
                     document.getElementById("transaction-form").reset()
                     setModal(0)
@@ -81,7 +82,7 @@ export default function TransactionModal({credit,account,setModal}) {
                     }}>
                         <option value="">Select Transaction Type</option>
                         <option value="debit">Debit</option>
-                        <option value="credit">Credit</option>
+                        {account=="credit"?"":<option value="credit">Credit</option>}
                     </select>
 
                     <label>$</label>

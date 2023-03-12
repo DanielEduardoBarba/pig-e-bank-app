@@ -12,7 +12,8 @@ console.log(PIC_URI)
                 <p>Credit ID: {credit.loanID}</p>
                 <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
                 <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
-                <p>Balance: ${credit.amount|| "0.00"}</p>
+                <p>Balance: ${ (Number(pendingBalance)+Number(availableBalance)).toFixed(2) || "0.00"}</p>
+                <button> Make a Payment</button>
             </div>
         </>
     )

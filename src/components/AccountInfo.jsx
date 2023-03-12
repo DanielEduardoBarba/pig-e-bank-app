@@ -7,7 +7,7 @@ import { UserProvider } from "../App"
 export default function AcountInfo({availableBalance, pendingBalance}) {
     const { userID } = useContext(UserProvider)
 
-console.log(PIC_URI)
+//console.log(PIC_URI)
     return (
         <>
             <div className="AccountInfo">

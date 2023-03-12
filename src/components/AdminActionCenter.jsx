@@ -14,6 +14,7 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
 
         markForAdmin.action = ""
         setMarkForAdmin(markForAdmin)
+        console.log("ADMIN CENTER ACCOUNT: ",account)
     }, [])
 
     const submitWithPin = (e) => {
@@ -111,7 +112,7 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
                 }}>
                     <option value="">Select Action</option>
                     {account!=="chores" && markForAdmin.isPending!="false"?<option value="approve">Approve</option>:""}
-                    {account!=="chores" && markForAdmin.isPending=="false"?<option value="pending">Pending</option>:""}
+                    {(account!=="chores" && markForAdmin.isPending=="false") && account!="credit"?<option value="pending">Pending</option>:""}
                     <option value="remove">Remove</option>
                 </select>
 

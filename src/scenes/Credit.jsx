@@ -34,7 +34,7 @@ export default function Savings({ account, setAccount }) {
 
             {
                 creditLines
-                    ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} account={account} credit={credit} setMarkForCredit={setMarkForCredit}/>)
+                    ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} account={account} credit={credit} setMarkForCredit={setMarkForCredit} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>)
                     :"Ask your parents about a credit line :) ..."
             }
                
@@ -42,7 +42,7 @@ export default function Savings({ account, setAccount }) {
             </div>
             {
                 modal==1
-                    ?<TransactionModal account={account} setModal={setModal}/>
+                    ?<TransactionModal markForCredit={markForCredit} setMarkForCredit={setMarkForCredit} account={account} setModal={setModal}/>
                     : markForAdmin
                         ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
                         : ""
