@@ -65,8 +65,12 @@ export default function ChoresModal({account,setModal}) {
                 <form id="chore-form" className="chore-form" onSubmit={e =>submitChore(e)}>
                     <label>Chore Name</label>
                     <input name="title" id="title" placeholder="chore name" onChange={e => {
-                        newChore.title = e.target.value
-                        setNewChore(newChore)
+                        const asciiVal = e.target.value.charCodeAt(e.target.value.length - 1)
+                        if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122) || (asciiVal == 32 && e.target.value.length > 1)) {
+                            newChore.title = e.target.value
+                            setNewChore(newChore)
+                        }
+                        else document.getElementById("title").value = e.target.value.substring(0, e.target.value.length - 1)   
                     }} />
 
                     <label>$</label>

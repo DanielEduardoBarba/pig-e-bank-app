@@ -152,7 +152,6 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
                         <option value="">Select Account</option>
                         {account=="checking"?"":<option value="checking">Checking</option>}
                         {account=="savings"?"":<option value="savings">Savings</option>}
-                        {/* <option value="credit">credit</option> */}
                     </select>
 
                     <label>$</label>

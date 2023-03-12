@@ -9,7 +9,7 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
 
     useEffect(() => {
 
-        fetch(`${API_URL}/transactions/${userID}/${childID}/${account}`)
+        fetch(`${API_URL}/transactions/${userID}/${childID}/${(credit?.loanID)?(credit?.loanID):account}`)
             .then(incoming => incoming.json())
             .then(data => {
                 
@@ -61,7 +61,9 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
     return (
         <>
             <div className="transactionlist">
-                    <button onClick={() =>{                   
+                    <button onClick={() =>{  
+                        console.log("LOCAL ACCOUNT", account)                 
+                        console.log("LOCAL CREDIT", credit)                 
                         if(account=="credit")setMarkForCredit(credit)
                          setModal(1)
                     }} className="add-transaction"> Add Transaction</button>

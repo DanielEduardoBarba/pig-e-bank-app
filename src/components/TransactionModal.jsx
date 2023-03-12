@@ -10,7 +10,7 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
 
-    console.log("ACCOUNT NOW: ", account,'OK', markForCredit.loanID)
+   // console.log("ACCOUNT NOW: ", account,'Mark for credit', markForCredit)
     const submitTransaction = (e) => {
         e.preventDefault()
         let amountAlert = document.getElementById("amount").style
@@ -72,8 +72,13 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
             <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransaction(e)}>
                     <label>Transaction Name</label>
                     <input name="title" id="title" placeholder="transaction name" onChange={e => {
-                        newTransaction.title = e.target.value
-                        setNewTransaction(newTransaction)
+                          const asciiVal = e.target.value.charCodeAt(e.target.value.length - 1)
+                          if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122) || (asciiVal == 32 && e.target.value.length > 1)) {
+                            newTransaction.title = e.target.value
+                            setNewTransaction(newTransaction)
+                          }
+                          else document.getElementById("title").value = e.target.value.substring(0, e.target.value.length - 1)
+                        
                     }} />
 
                     <label>Transaction Type</label>

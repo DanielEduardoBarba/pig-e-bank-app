@@ -53,8 +53,13 @@ export default function AddCredit({account,setModal}) {
             <form id="transaction-form" className="transaction-form" onSubmit={e =>submitCreditLine(e)}>
                     <label>Credit Name</label>
                     <input name="title" id="title" placeholder="credit name" onChange={e => {
-                        newCredit.loanID = e.target.value
-                        setNewCredit(newCredit)
+                          const asciiVal = e.target.value.charCodeAt(e.target.value.length - 1)
+                          if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122) || (asciiVal == 32 && e.target.value.length > 1)) {
+                            newCredit.loanID = e.target.value
+                            setNewCredit(newCredit)
+                          }
+                          else document.getElementById("title").value = e.target.value.substring(0, e.target.value.length - 1)
+                       
                     }} />
 
                     <label>APR</label>

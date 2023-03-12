@@ -20,7 +20,7 @@ export default function CreditLine({ account, modal, setModal, credit, setMarkFo
                 <TransactionList
                     credit={credit}
                     setMarkForCredit={setMarkForCredit}
-                    account={credit.loanID}
+                    account={account}
                     setModal={setModal}
                     modal={modal}
                     setAvailableBalance={setAvailableBalance}

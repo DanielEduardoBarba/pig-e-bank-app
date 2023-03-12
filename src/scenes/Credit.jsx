@@ -4,9 +4,9 @@ import AdminModal from "../components/AdminModal"
 import CreditLine from "../components/CreditLine"
 import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
-import "./Checking.css"
 import TransferModal from "../components/TransferModal"
 import AddCreditModal from "../components/AddCreditModal"
+import "./Credit.css"
 
 
 export default function Savings({ account, setAccount }) {

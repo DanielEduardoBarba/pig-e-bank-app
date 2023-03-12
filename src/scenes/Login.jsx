@@ -59,7 +59,7 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
         <>
             <div className='blurr-background' onClick={()=>{
                setParentModal(0)
-               setError("Login")
+               setError("LOGIN")
             }}/>
             <div className="Login">
                 <p>{error || "LOGIN"}</p>

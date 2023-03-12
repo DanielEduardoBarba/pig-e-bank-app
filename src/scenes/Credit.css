@@ -40,8 +40,11 @@
 
 .Credit{
     position: relative;
-    height: 200px;
-    background-color: red;
+    height: 100%;
+    border: 3px solid black;
+    border-radius: 30px;
+    overflow: scroll;
+
 }
 
 
