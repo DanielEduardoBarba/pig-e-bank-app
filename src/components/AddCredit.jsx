@@ -13,7 +13,12 @@ export default function AddCredit({account,setModal}) {
 
     const submitCreditLine = (e) => {
         e.preventDefault()
-          
+
+
+          newCredit.account=account
+          newCredit.userID=userID
+          newCredit.childID=childID
+
             fetch(`${API_URL}/credit`,{
                 method:"POST",
                 headers:{
@@ -48,7 +53,7 @@ export default function AddCredit({account,setModal}) {
             <form id="transaction-form" className="transaction-form" onSubmit={e =>submitCreditLine(e)}>
                     <label>Credit Name</label>
                     <input name="title" id="title" placeholder="credit name" onChange={e => {
-                        newCredit.title = e.target.value
+                        newCredit.loanID = e.target.value
                         setNewCredit(newCredit)
                     }} />
 
@@ -56,7 +61,7 @@ export default function AddCredit({account,setModal}) {
                     <input name="APR" id="APR" placeholder="0-100%"
                         onChange={e => {
                             if (e.target.value<=100 && e.target.value > 0) {
-                                newCredit.APR = e.target.value
+                                newCredit.APR =String(Number(e.target.value)/100)
                                 setNewCredit(newCredit)
                             }
                             else document.getElementById("APR").value = e.target.value.substring(0, e.target.value.length - 1)

@@ -10,7 +10,7 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
 
-
+    console.log("ACCOUNT NOW: ", account,'OK', markForCredit.loanID)
     const submitTransaction = (e) => {
         e.preventDefault()
         let amountAlert = document.getElementById("amount").style
@@ -22,7 +22,7 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
             newTransaction.userID=userID
             //console.log("ACCOUNT NOW ", account)
             if(account=="checking" || account=="savings") newTransaction.account=account
-            else newTransaction.account=markForCredit?.loanID
+            else newTransaction.account=markForCredit.loanID
            // console.log(markForCredit.loanID)
             
             if(newTransaction.type=="debit"){

@@ -29,8 +29,7 @@ export default function Savings({ account, setAccount }) {
             })
             .catch(console.error)
 
-
-    },[])
+    },[modal])
 
     
     return (
@@ -41,7 +40,7 @@ export default function Savings({ account, setAccount }) {
             {
                 creditLines.length>0
                     ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} setMarkForCreditPay={setMarkForCreditPay} account={account} credit={credit} setMarkForCredit={setMarkForCredit} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>)
-                    :"Ask your parents about a credit line :) ..."
+                    :""
             }
                <button onClick={()=>setModal(3)}>ADD A CREDIT LINE!</button> 
 

@@ -6,12 +6,12 @@ export default function Metrics(){
     useEffect(()=>{
 
         const sdk = new ChartsEmbedSDK({
-          baseUrl: 'https://charts.mongodb.com/charts-charts-fixture-tenant-zdvkh',
+          baseUrl: 'https://charts.mongodb.com/charts-daniel-barba-dnkzv',
         });
         
         // embed a chart
         const chart = sdk.createChart({
-          chartId: '48043c78-f1d9-42ab-a2e1-f2d3c088f864',
+          chartId: '640d599e-554b-4d3e-8905-0508f96da2c8',
         });
         
         // render the chart into a container
@@ -24,23 +24,23 @@ export default function Metrics(){
           .getElementById('refreshButton')
           .addEventListener('click', () => chart.refresh());
         
-        // embed a dashboard
-        // const dashboard = sdk.createDashboard({
-        //   dashboardId: '61d02578-6148-4c87-9cad-1fbaef50a0d3',
-        // });
+       // embed a dashboard
+    //     const dashboard = sdk.createDashboard({
+    //       dashboardId: '640d4850-0743-48af-8717-cef57dcf27c1',
+    //     });
         
-        // render the chart into a container
-        // dashboard
-        //   .render(document.getElementById('dashboard'))
-        //   .catch(() => window.alert('Dashboard failed to initialise'));
+    //    // render the chart into a container
+    //     dashboard
+    //       .render(document.getElementById('dashboard'))
+    //       .catch(() => window.alert('Dashboard failed to initialise'));
           
         },[])
 
     return(
         <>
-          <div style={{height:"200px"}}id="chart"/>
-        <div style={{height:"200px"}} id="dashboard"/>
-        <div style={{height:"200px"}}id="refreshButton"/>
+          <div style={{height:"500px"}}id="chart"/>
+        <button style={{height:"20px"}}id="refreshButton">Refresh</button>
+        {/* <div style={{height:"200px"}} id="dashboard"/> */}
         </>
     )
 }

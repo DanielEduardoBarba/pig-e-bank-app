@@ -10,10 +10,10 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
   
+    console.log("ACCOUNT NOW: ", account)
 
    const checkBalance = (e) =>{
     e.preventDefault()
-       console.log("HERE!!!: ", newTransaction.sendFrom, account)
    if(newTransaction.sendFrom 
    && account=="credit")fetch(`${API_URL}/transactions/${userID}/${childID}/${newTransaction.sendFrom}`)
            .then(incoming => incoming.json())
