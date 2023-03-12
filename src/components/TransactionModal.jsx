@@ -20,9 +20,10 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
         if (newTransaction.type && newTransaction.title && newTransaction.amount) {
             newTransaction.childID=childID
             newTransaction.userID=userID
+            //console.log("ACCOUNT NOW ", account)
             if(account=="checking" || account=="savings") newTransaction.account=account
-            else newTransaction.account=markForCredit.loanID
-            console.log(markForCredit.loanID)
+            else newTransaction.account=markForCredit?.loanID
+           // console.log(markForCredit.loanID)
             
             if(newTransaction.type=="debit"){
                 newTransaction.isPending="false"

@@ -63,7 +63,7 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
             <div className="transactionlist">
                     <button onClick={() =>{
                         //console.log("HI")
-                        setMarkForCredit(credit)
+                        if(account=="credit")setMarkForCredit(credit)
                          setModal(1)
                          console.log(modal)
                     }} className="add-transaction"> Add Transaction</button>

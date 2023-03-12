@@ -7,6 +7,7 @@ import { API_URL } from "../URLs";
 import NewChildSection from "../components/NewChildSection";
 import ParentAccountSection from "../components/ParentAccountSection";
 import logo from "../assets/logo.png"
+
 const firebaseConfig = {
     apiKey: "AIzaSyAe9lxdSMCdjXCd6z9C2Ln3eABwVyFlLD8",
     authDomain: "pig-e-bank-app.firebaseapp.com",
@@ -23,7 +24,7 @@ const handleLogin = (setUserID) => {
 
     signInWithPopup(auth, provider)
         .then(_user => {
-            console.log(_user.user.uid)
+            console.log(_user)
             setUserID(_user.user.uid)
             localStorage.setItem("uid", _user.user.uid)
         })
@@ -40,6 +41,7 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
     useEffect(() => {
         if (localStorage.getItem("uid")) setUserID(localStorage.getItem("uid"))
     }, [])
+
     useEffect(() => {
         if (userID) {
             fetch(`${API_URL}/children/${userID}`)
@@ -52,8 +54,6 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
         }
 
     }, [userID, newChild, parentModal])
-
-
 
     return (
         <>

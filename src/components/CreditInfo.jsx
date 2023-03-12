@@ -3,9 +3,11 @@ import { useContext, useState } from "react"
 
 
 
-export default function CreditInfo({credit, availableBalance, pendingBalance}) {
+export default function CreditInfo({credit, setModal, account, availableBalance,setMarkForCreditPay, pendingBalance}) {
 
-console.log(PIC_URI)
+
+    console.log("AVAIL ", availableBalance)
+    console.log("CREDIT ", credit)
     return (
         <>
             <div className="AccountInfo">
@@ -13,7 +15,15 @@ console.log(PIC_URI)
                 <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
                 <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
                 <p>Balance: ${ (Number(pendingBalance)+Number(availableBalance)).toFixed(2) || "0.00"}</p>
-                <button> Make a Payment</button>
+                <button onClick={()=>{
+                    const markThisCreditLine ={
+                        account,
+                        availableBalance,
+                        loanID:credit.loanID
+                    }
+                    setMarkForCreditPay(markThisCreditLine)
+                    setModal(2)
+                }}> Make a Payment</button>
             </div>
         </>
     )

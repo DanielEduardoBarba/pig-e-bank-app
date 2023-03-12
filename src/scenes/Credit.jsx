@@ -5,6 +5,7 @@ import CreditLine from "../components/CreditLine"
 import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
 import "./Checking.css"
+import TransferModal from "../components/TransferModal"
 
 
 export default function Savings({ account, setAccount }) {
@@ -12,6 +13,7 @@ export default function Savings({ account, setAccount }) {
     const [balance, setBalance] = useState(0)
     const [markForAdmin, setMarkForAdmin] = useState("")
     const [creditLines, setCreditLine] = useState("")
+    const [markForCreditPay, setMarkForCreditPay] = useState("")
     const [markForCredit, setMarkForCredit] = useState("")
     const {userID, childID} = useContext(UserProvider)
 
@@ -34,18 +36,20 @@ export default function Savings({ account, setAccount }) {
 
             {
                 creditLines
-                    ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} account={account} credit={credit} setMarkForCredit={setMarkForCredit} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>)
+                    ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} setMarkForCreditPay={setMarkForCreditPay} account={account} credit={credit} setMarkForCredit={setMarkForCredit} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>)
                     :"Ask your parents about a credit line :) ..."
             }
-               
+                
 
             </div>
             {
                 modal==1
                     ?<TransactionModal markForCredit={markForCredit} setMarkForCredit={setMarkForCredit} account={account} setModal={setModal}/>
-                    : markForAdmin
-                        ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
-                        : ""
+                    : modal==2
+                        ? <TransferModal availableBalance={markForCreditPay.availableBalance} markForCreditPay={markForCreditPay} account={markForCreditPay.account} setModal={setModal}/>
+                        :markForAdmin
+                            ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                            : ""
             }
         </>
     )

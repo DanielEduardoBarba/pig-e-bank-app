@@ -10,6 +10,7 @@ export default function Savings({ account, setAccount,userID }) {
     const [modal, setModal] = useState(0)
     const [availableBalance, setAvailableBalance] = useState(0)
     const [pendingBalance, setPendingBalance] = useState(0)
+    const [markForCredit, setMarkForCredit] = useState("")
     const [markForAdmin, setMarkForAdmin] = useState("")
 
     return (
@@ -28,7 +29,7 @@ export default function Savings({ account, setAccount,userID }) {
             </div>
             {
                 modal==1
-                    ? <TransactionModal account={account} setModal={setModal}/>
+                    ? <TransactionModal  account={account} setModal={setModal}/>
                     : modal==2
                         ?<TransferModal availableBalance={availableBalance} account={account} setModal={setModal}/>
                         : markForAdmin

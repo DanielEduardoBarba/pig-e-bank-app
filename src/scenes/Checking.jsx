@@ -10,6 +10,7 @@ export default function Checking({account, setAccount, userID }) {
     const [modal, setModal] = useState(0)
     const [availableBalance, setAvailableBalance] = useState(0)
     const [pendingBalance, setPendingBalance] = useState(0)
+    const [markForCredit, setMarkForCredit] = useState("")
     const [markForAdmin, setMarkForAdmin] = useState("")
 
     return (

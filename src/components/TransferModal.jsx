@@ -4,35 +4,73 @@ import { API_URL } from "../URLs"
 
 const transactionTemplate = { amount: "", title: ""}
 
-export default function TransferModal({availableBalance,account,setModal}) {
+export default function TransferModal({availableBalance, markForCreditPay, account,setModal}) {
 
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
+  
+
+   const checkBalance = (e) =>{
+    e.preventDefault()
+       console.log("HERE!!!: ", newTransaction.sendFrom, account)
+   if(newTransaction.sendFrom 
+   && account=="credit")fetch(`${API_URL}/transactions/${userID}/${childID}/${newTransaction.sendFrom}`)
+           .then(incoming => incoming.json())
+           .then(data => {
+               
+               console.log(data)
+               
+               let fromAccountFunds=0
+               for (let i = 0; i < data.length; i++) {
+                fromAccountFunds+=Number(data[i].amount)
+                }
+    
+               if(fromAccountFunds>=newTransaction.amount)submitTransfer(e)
+                else{
+                    setError(`Insufficient funds from ${newTransaction.sendFrom}!`)
+                    document.getElementById("amount").style.backgroundColor="yellow"
+                    document.getElementById("type").style.backgroundColor="yellow"
+                }
+        
+            })
+           .catch(console.error)
+   }
+
+
 
 
     const submitTransfer = (e) => {
         e.preventDefault()
-        let amountAlert = document.getElementById("amount").style
-        let typeAlert = document.getElementById("type").style
 
-        if(availableBalance<newTransaction.amount){
+
+        if(availableBalance<=newTransaction.amount){
             setError("Insufficient funds!")
-            amountAlert.backgroundColor="yellow"
+            document.getElementById("amount").style.backgroundColor="yellow"
             return
         }
 
 
-        if (newTransaction.sendTo && newTransaction.amount) {
+        if ((newTransaction.sendTo && account!="credit")
+        || (!newTransaction.sendTo && account=="credit")
+        && newTransaction.amount) {
 
             newTransaction.childID=childID
             newTransaction.userID=userID
 
-            newTransaction.sendFrom=account
-            newTransaction.account=newTransaction.sendFrom
+            if(account=="credit"){
+
+                newTransaction.sendTo=markForCreditPay.loanID
+                newTransaction.account=newTransaction.sendFrom
+                newTransaction.title=`Payment: ${newTransaction.sendFrom} to CL-${newTransaction.sendTo}, Thank you :)`
+            }else{
+
+                newTransaction.sendFrom=account
+                newTransaction.account=newTransaction.sendFrom
+                newTransaction.title=`Transfer: ${newTransaction.sendFrom} to ${newTransaction.sendTo}`
+            }
 
             newTransaction.isPending="false"
-            newTransaction.title=`Transfer: ${newTransaction.sendFrom} to ${newTransaction.sendTo}`
             newTransaction.amount *= -1
             
             
@@ -48,10 +86,11 @@ export default function TransferModal({availableBalance,account,setModal}) {
             })
             .then(incoming=>incoming.json())
             .then(response=>{
-
+                console.log("RESPONSE: ",response)
                 if(response.serverStatus==2){
                     newTransaction.account=newTransaction.sendTo
                     newTransaction.amount *= -1
+                    console.log("RESPONSE: ",newTransaction)
                         fetch(`${API_URL}/transactions`,{
                             method:"POST",
                             headers:{
@@ -78,8 +117,8 @@ export default function TransferModal({availableBalance,account,setModal}) {
         
         }
         else { 
-            if (!newTransaction.amount) amountAlert.backgroundColor="yellow"
-            if (!newTransaction.sendTo) typeAlert.backgroundColor="yellow"
+            if (!newTransaction.amount) document.getElementById("amount").style.backgroundColor="yellow"
+            if (!newTransaction.sendTo) document.getElementById("type").style.backgroundColor="yellow"
         }
            
 
@@ -95,11 +134,19 @@ export default function TransferModal({availableBalance,account,setModal}) {
                 setModal(0)
                 }}/>
             <div className="TransactionModal">
-                <h3>{error || "Transfer Funds"}</h3>
-                <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransfer(e)}>
-                   <label>Transfer from {account} to</label>
+                <h3>{error
+                        ?error
+                        :account=="credit" 
+                            ?"Make A Payment"
+                            :"Transfer Funds"}</h3>
+                <form id="transaction-form" className="transaction-form" onSubmit={e =>account=="credit"?checkBalance(e):submitTransfer(e)}>
+                   <label>{account=="credit"
+                        ?`Pay from which account?`
+                        :`Transfer from ${account} to`
+                     }</label>
                     <select name="type" id="type" onChange={e => {
-                        newTransaction.sendTo = e.target.value
+                       if(account=="credit") newTransaction.sendFrom = e.target.value
+                       else newTransaction.sendTo = e.target.value
                         setNewTransaction(newTransaction)
                     }}>
                         <option value="">Select Account</option>

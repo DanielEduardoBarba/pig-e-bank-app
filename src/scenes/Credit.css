@@ -1,3 +1,7 @@
+.CreditLine{
+    position: relative;
+}
+
 .transactionlist{
     /* scroll-behavior: smooth; */
     background-color: lightgoldenrodyellow;
