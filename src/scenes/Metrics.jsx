@@ -13,11 +13,16 @@ export default function Metrics(){
         const chart = sdk.createChart({
           chartId: '640d599e-554b-4d3e-8905-0508f96da2c8',
         });
-        
-        // render the chart into a container
+        const chart1 = sdk.createChart({
+          chartId: '640d6762-9d2d-48e0-8dd4-02e6c383cdd1',
+        });
+
         chart
           .render(document.getElementById('chart'))
-          .catch(() => window.alert('Chart failed to initialise'));
+          .catch(() => window.alert('Chart failed to initialize'));
+        chart1
+          .render(document.getElementById('chart1'))
+          .catch(() => window.alert('Chart failed to initialize'));
         
         // refresh the chart whenever #refreshButton is clicked
         document
@@ -32,13 +37,14 @@ export default function Metrics(){
     //    // render the chart into a container
     //     dashboard
     //       .render(document.getElementById('dashboard'))
-    //       .catch(() => window.alert('Dashboard failed to initialise'));
+    //       .catch(() => window.alert('Dashboard failed to initialize'));
           
         },[])
 
     return(
         <>
           <div style={{height:"500px"}}id="chart"/>
+          <div style={{height:"500px"}}id="chart1"/>
         <button style={{height:"20px"}}id="refreshButton">Refresh</button>
         {/* <div style={{height:"200px"}} id="dashboard"/> */}
         </>
