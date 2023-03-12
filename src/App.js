@@ -7,15 +7,16 @@ import Hero from './components/Hero';
 import Chores from './scenes/Chores';
 import Savings from './scenes/Savings'
 import Credit from './scenes/Credit'
+import Metrics from './scenes/Metrics';
 
 export const UserProvider = createContext(null)
 
-const tabName = ['Checking Account', 'Chores', 'Savings Account', 'Credit']
+const tabName = ['Checking Account', 'Chores', 'Savings Account', 'Credit', 'Charts']
 
 function App() {
   // const [childID, setChildID] = useState("")
   // const [userID, setUserID] = useState("")
-  const [childID, setChildID] = useState("billthekiddo")
+  const [childID, setChildID] = useState("jimbokimbo")
   const [userID, setUserID] = useState("DsRNmKjspkZFjfBXZdJi2HHcXCP2")
   const [account, setAccount] = useState("credit")
   const [tab, setTab] = useState(3)
@@ -36,7 +37,9 @@ function App() {
                     ? <Savings account={account} setAccount={setAccount} userID={userID} />
                     : tab==3
                       ? <Credit account={account} setAccount={setAccount} userID={userID} />
-                      :""
+                      :tab==4
+                        ? <Metrics userID={userID} childID={childID}/>
+                        :""
           }
           <Footer />
           

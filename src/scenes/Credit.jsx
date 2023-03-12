@@ -6,6 +6,7 @@ import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
 import "./Checking.css"
 import TransferModal from "../components/TransferModal"
+import AddCreditModal from "../components/AddCreditModal"
 
 
 export default function Savings({ account, setAccount }) {
@@ -19,6 +20,7 @@ export default function Savings({ account, setAccount }) {
 
 
     useEffect(()=>{
+     
         fetch(`${API_URL}/credit/${userID}/${childID}`)
             .then(incoming => incoming.json())
             .then(data => {
@@ -27,19 +29,21 @@ export default function Savings({ account, setAccount }) {
             })
             .catch(console.error)
 
+
     },[])
 
+    
     return (
         <>
             <div className="Credit">
 
 
             {
-                creditLines
+                creditLines.length>0
                     ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} setMarkForCreditPay={setMarkForCreditPay} account={account} credit={credit} setMarkForCredit={setMarkForCredit} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>)
                     :"Ask your parents about a credit line :) ..."
             }
-                
+               <button onClick={()=>setModal(3)}>ADD A CREDIT LINE!</button> 
 
             </div>
             {
@@ -47,9 +51,11 @@ export default function Savings({ account, setAccount }) {
                     ?<TransactionModal markForCredit={markForCredit} setMarkForCredit={setMarkForCredit} account={account} setModal={setModal}/>
                     : modal==2
                         ? <TransferModal availableBalance={markForCreditPay.availableBalance} markForCreditPay={markForCreditPay} account={markForCreditPay.account} setModal={setModal}/>
-                        :markForAdmin
-                            ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
-                            : ""
+                        :modal==3
+                            ? <AddCreditModal account={account} setModal={setModal} userID={userID} childID={childID}/>
+                            :markForAdmin
+                                ? <AdminModal account={account} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>
+                                : ""
             }
         </>
     )

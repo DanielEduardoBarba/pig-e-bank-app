@@ -5,27 +5,21 @@ export default function Hero({tabName, setTab, setAccount, setChildID}){
         <>
         <div className="Hero">
                <p>{tabName}</p>
-
-               <button onClick={()=>{
-                setTab(0)
-                setAccount("checking")
-                }}>Checking</button>
-
-               <button onClick={()=>{
-                setTab(1)
-                setAccount("chores")
-                }}>Chores</button>
-
-               <button onClick={()=>{
-                setTab(2)
-                setAccount("savings")
-                }}>Savings</button>
-
-               <button onClick={()=>{
-                setTab(3)
-                setAccount("credit")
-                }}>Credit</button>
-
+               <select style={{height: "50px", width:"200px"}} name="type" id="type" onChange={e => {
+                        if(e.target.value=="checking") setTab(0)
+                        if(e.target.value=="chores") setTab(1)
+                        if(e.target.value=="savings") setTab(2)
+                        if(e.target.value=="credit") setTab(3)
+                        if(e.target.value=="metrics") setTab(4)
+                       setAccount(e.target.value)
+                    }}>
+                        <option value="checking">Checking</option>
+                        <option value="chores">Chores</option>
+                        <option value="savings">Savings</option>
+                        <option value="credit">Credit</option>
+                        <option value="metrics">Charts</option>
+                     </select>
+        
                <img onClick={()=>setChildID("")} className="logo" src={logo} />
         </div>
         </>

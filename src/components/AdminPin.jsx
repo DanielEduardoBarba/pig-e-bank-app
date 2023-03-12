@@ -9,6 +9,8 @@ const checkPin = () =>{
     fetch(`${API_URL}/findpin/${markForAdmin.userID}/${markForAdmin.childID}`)
     .then(incoming => incoming.json())
     .then(response => { 
+        console.log("PIN ", pin)
+        console.log("ADMINPIN ", response[0].adminPin)
         if( pin == response[0].adminPin){
             setAdminPin(response[0].adminPin)
             setError("")
