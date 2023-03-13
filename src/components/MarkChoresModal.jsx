@@ -34,13 +34,13 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                     })
                         .then(incoming => incoming.json())
                         .then(response => {
-
+                            console.log("RESPONSE MARK CHORES ", response)
                             if (response.serverStatus == 2 && markComplete.action=="done") {
-                                document.getElementById("chores-form").reset()
+                                document.getElementById("chore-form").reset()
                                 setMarkComplete("")
                             }
                             else if (response.serverStatus == 34 && markComplete.action=="pending") {
-                                document.getElementById("chores-form").reset()
+                                document.getElementById("chore-form").reset()
                                 setMarkComplete("")
                             }
                             else alert("You alread marked this as done")
