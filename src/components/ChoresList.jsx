@@ -36,26 +36,23 @@ export default function ChoresList({ modal, setModal, markComplete, setMarkCompl
             .catch(console.error)
     }, [modal, markComplete, markForAdmin])
 
-
     return (
         <>
             <div className="choreslist">
+         <button onClick={()=>{
+                   setModal(1)
+                }} className="add-chore-bn"/>
                 {
                     chores
                         ? chores.map(CH => <Chore key={CH.choreID} CH={CH} setMarkComplete={setMarkComplete} setMarkForAdmin={setMarkForAdmin} />)
                         : ""
                 }
             </div>
-            <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+            <div className="progress-bar-div">
                 <ChoresProgressBar bar={bar} chores={chores} />
             </div>
-                <button onClick={()=>{
-                   setModal(1)
-                }} className="add-chore">Add Chore</button>
+             
 
-                {
-                    
-                 }
         </>
     )
 }

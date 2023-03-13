@@ -60,13 +60,21 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
 
     return (
         <>
-            <div className="transactionlist">
+            <div className="transaction-list">
+                <div className="transactionUI">
                     <button onClick={() =>{  
                         console.log("LOCAL ACCOUNT", account)                 
                         console.log("LOCAL CREDIT", credit)                 
                         if(account=="credit")setMarkForCredit(credit)
                          setModal(1)
                     }} className="add-transaction"> Add Transaction</button>
+
+                   {
+                    account=="checking" || account=="savings"
+                        ?<button onClick={()=>setModal(2)} className="make-transfer">Transfer</button>
+                        :""
+                    } 
+                </div>
                 <div>
                     {
                         transactions.slice(0).reverse().map((TX) => (

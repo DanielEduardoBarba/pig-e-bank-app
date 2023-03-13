@@ -1,4 +1,3 @@
-import { useState,useEffect } from "react"
 
 export default function Chore({CH, setMarkComplete, setMarkForAdmin}){
     
@@ -6,17 +5,15 @@ export default function Chore({CH, setMarkComplete, setMarkForAdmin}){
         <>
         <div style={{opacity:CH.isDone!=="false"?"0.4":"1"}} className="chore">
 
-            <p onClick={()=>{
+            <button className="admin-task-btn" onClick={()=>{
                 CH.action="chore"
-            setMarkForAdmin(CH)
-            console.log(CH)
-            }}>CHORE ITEM</p>
+                setMarkForAdmin(CH)
+                console.log(CH)
+            }}/>
             <p>{CH.title}</p>
             <p>Payout: ${CH.amount}</p>
             {/* <p>{CH.isDone}</p> */}
-            <button 
-            //style={{pointerEvents: CH.isDone!=="false"?"none":"all"}} 
-            onClick={()=>setMarkComplete(CH)}>DONE</button>
+            <button className="mark-task-btn" onClick={()=>setMarkComplete(CH)}/>
         </div>
         {
             

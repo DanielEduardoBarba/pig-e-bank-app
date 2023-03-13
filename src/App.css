@@ -1,11 +1,122 @@
 .whole-page {
-  background-color: pink;
+  background-color: white;
   display: flex;
   flex-direction: column;
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
+
+.transaction-list{
+  scroll-behavior: smooth; 
+  /* background-color: lightgoldenrodyellow; */
+  width: 80vw;
+  border-radius: 20px;
+  height: 50%;
+  padding: 20px;
+  overflow-inline:scroll;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  margin: 10px auto;
+  border: 3px solid black;
+  
+}
+
+.add-transaction{
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+}
+.make-transfer{
+  border-radius: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+.single-transaction>p{
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding:10px;
+  background-color: wheat;
+}
+
+.single-transaction{
+  position: relative;
+  display: flex;
+  justify-content: right;
+  flex-direction: row;
+  margin: 5px;
+  box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+  -moz-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+  border-radius: 10px;
+}
+
+.TransactionModal{
+  position: absolute;
+  opacity: 1 !important;
+  background-color: palevioletred;
+  translate: calc(50vw - 50%) calc(50vh - 50%);
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 50px;
+  z-index: 100;
+}
+
+.TransactionModal *{
+  margin: 10px;
+  font-size: large;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.transaction-form{
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+}
+
+.transactionUI{
+  display: flex;
+  flex-direction: row;
+  z-index: 1;
+}
+
+.admin-transaction-btn{
+  position: absolute;
+  background-image: url("./assets/gear-icon.png");
+  translate:10px -5px;
+  background-color: transparent;
+  height: 100px;
+  width: 100%;
+  justify-items: right;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  border: 3px solid transparent;
+}
+
+.AccountInfo{
+  padding:20px;
+  background-color: wheat;
+  display: flex;
+  flex-direction: row;
+}
+
+.AccountInfo>p{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ text-align: center;
+
+}
+
 
 .Footer {
   position: absolute;
@@ -18,6 +129,13 @@
   background-color: rgb(241, 155, 169);
 
 }
+.logo{
+  background-color: transparent;
+  border: 10px solid transparent;
+  border-radius: 10%;
+  width: 50px;
+  filter: drop-shadow(0px 0px 10px );
+}
 
 .blurr-background{
   position: absolute;
@@ -28,7 +146,6 @@
   height: 100%;
 
 }
-
 
 .AdminModal{
   position: absolute;

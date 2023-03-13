@@ -5,7 +5,7 @@ import { UserProvider } from "../App"
 
 
 export default function AcountInfo({availableBalance, pendingBalance}) {
-    const { userID } = useContext(UserProvider)
+    const { userID, childID } = useContext(UserProvider)
 
 //console.log(PIC_URI)
     return (
@@ -14,7 +14,7 @@ export default function AcountInfo({availableBalance, pendingBalance}) {
                 <img
                     style={{ width: '100px', height: '100px' }}
                     src={userPic} />
-                <p>USER ID: {userID}</p>
+                <p>Welcome back {childID}!</p>
                 <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
                 <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
                 <p>Balance: ${(Number(pendingBalance)+Number(availableBalance)).toFixed(2) || "0.00"}</p>
