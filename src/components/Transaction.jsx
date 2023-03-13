@@ -16,8 +16,8 @@ export default function Transaction({setModal,TX,setMarkForAdmin}){
                         ?"-$"
                         :"$"}
                         {TX.amount<0
-                            ?TX.amount*-1
-                            :TX.amount
+                            ?Number(TX.amount*-1).toFixed(2)
+                            :Number(TX.amount).toFixed(2)
                             }</p>
                 <p className="transaction-amount">
                      {TX.isPending!="false"
@@ -28,8 +28,8 @@ export default function Transaction({setModal,TX,setMarkForAdmin}){
                             {TX.isPending!="false"
                                 ?""
                                 :TX.currentBalance<0
-                                        ?TX.currentBalance*-1
-                                        :TX.currentBalance
+                                        ?(Number(TX.currentBalance)*-1).toFixed(2)
+                                        :Number(TX.currentBalance).toFixed(2)
                                         }</p>
             </div>
             {

@@ -30,7 +30,7 @@
   width: 80vw;
   border-radius: 20px;
   min-height: 50%;
-  max-height: 390px;
+  max-height: 55vh;
   padding: 20px;
   overflow-inline:scroll;
   overflow-y: scroll;
@@ -142,6 +142,8 @@
   display: flex;
   flex-direction: row;
   overflow: scroll;
+  min-height: fit-content;
+  height: 15vh;
 }
 
 .AccountInfo>p{
@@ -159,9 +161,9 @@
 
 
 .Footer {
-  position: absolute;
-  translate: 3vw 96vh;
-
+  translate: 3px 5px;
+  background-color: transparent;
+  z-index: -1;
 }
 
 .Hero {
@@ -179,6 +181,7 @@
   text-align: center;
   font-family:Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 600;
+  margin-right: 20px;
 }
 
 .logo{

@@ -65,7 +65,7 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
             }} />
             <div className="ChoresModal">
                 <h3>{error || "Confirm Task is Done!"}</h3>
-                <form id="chores-form" className="chores-form" onSubmit={e => submitWithPin(e)}>
+                <form id="chore-form" className="chore-form" onSubmit={e => submitWithPin(e)}>
 
                     <p>Did you complete the task:</p>
                     <p style={{ fontWeight: "900", backgroundColor: "orange" }}>

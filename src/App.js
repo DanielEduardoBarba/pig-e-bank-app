@@ -45,9 +45,9 @@ function App() {
                         ? <Metrics userID={userID} childID={childID}/>
                         :""
           }
-          <Footer />
           
         </div>
+          <Footer />
       </UserProvider.Provider>
     </>
   );

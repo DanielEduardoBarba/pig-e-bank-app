@@ -5,7 +5,7 @@ import shortCoins from "../assets/short-coins.wav"
 
 const transactionTemplate = { amount: "", title: ""}
 
-export default function TransferModal({availableBalance, markForCreditPay, account,setModal}) {
+export default function TransferModal({availableBalance, markForCreditPay,setMarkForCredit, account,setModal}) {
 
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
@@ -15,10 +15,13 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
 
    const checkBalance = (e) =>{
     e.preventDefault()
-   if(newTransaction.sendFrom 
-   && account=="credit")fetch(`${API_URL}/transactions/${userID}/${childID}/${newTransaction.sendFrom}`)
-           .then(incoming => incoming.json())
-           .then(data => {
+    console.log("SENDING PAYMENT OF CARD")
+
+    if(newTransaction.sendFrom 
+        && account=="credit")fetch(`${API_URL}/transactions/${userID}/${childID}/${newTransaction.sendFrom}`)
+        .then(incoming => incoming.json())
+        .then(data => {
+               console.log("GOT INFO ABOUT BALANCE")
                
                console.log(data)
                
@@ -43,18 +46,22 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
 
     const submitTransfer = (e) => {
         e.preventDefault()
-
-
+        
+        console.log("SENDING TRANSFER OF PAY TO CARD")
         if(availableBalance<=newTransaction.amount){
+            console.log("ERROR!!!")
             setError("Insufficient funds!")
             document.getElementById("amount").style.backgroundColor="yellow"
             return
         }
 
-
-        if ((newTransaction.sendTo && account!="credit")
-        || (!newTransaction.sendTo && account=="credit")
-        && newTransaction.amount) {
+        console.log("SEND TO BEFORE IF " ,newTransaction.sendTo)
+        console.log("ACC BEFORE IF " ,account)
+        console.log("AMOUNT BEFORE IF " ,newTransaction.amount)
+        // if ((newTransaction.sendTo && account!="credit")
+        // || (!newTransaction.sendTo && account=="credit")
+        // &&
+        if( newTransaction.amount) {
 
             newTransaction.childID=childID
             newTransaction.userID=userID
@@ -63,7 +70,7 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
 
                 newTransaction.sendTo=markForCreditPay.loanID
                 newTransaction.account=newTransaction.sendFrom
-                newTransaction.title=`Payment: ${newTransaction.sendFrom} to CL-${newTransaction.sendTo}, Thank you :)`
+                newTransaction.title=`Payment: ${newTransaction.sendFrom} to ${newTransaction.sendTo}`
             }else{
 
                 newTransaction.sendFrom=account
@@ -77,7 +84,7 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
             
             console.log("SEND FROM: ",newTransaction)
             
-
+            console.log("ABOUT TO FETCH PAYMENT")
             fetch(`${API_URL}/transactions`,{
                 method:"POST",
                 headers:{
@@ -88,10 +95,13 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
             .then(incoming=>incoming.json())
             .then(response=>{
                 console.log("RESPONSE: ",response)
+                console.log("PAYMENT RESPONSE && SENDING DEBIT ON ACC")
                 if(response.serverStatus==2){
                     newTransaction.account=newTransaction.sendTo
                     newTransaction.amount *= -1
                     console.log("RESPONSE: ",newTransaction)
+
+                    console.log("SENDING TRANSFER TO CARD")
                         fetch(`${API_URL}/transactions`,{
                             method:"POST",
                             headers:{
@@ -103,6 +113,8 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
                         .then(response=>{
             
                             if(response.serverStatus==2){
+                                setMarkForCredit("")
+                                setNewTransaction(transactionTemplate)
                                 new Audio(shortCoins).play()
                                 document.getElementById("transaction-form").reset()
                                 setModal(0)

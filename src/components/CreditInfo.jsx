@@ -13,8 +13,10 @@ export default function CreditInfo({credit, setModal, account, availableBalance,
             <div className="CreditInfo">
                 <p>Credit ID: {credit.loanID}</p>
                 <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
-                <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
-                <p>Balance: ${ (Number(pendingBalance)+Number(availableBalance)).toFixed(2) || "0.00"}</p>
+                {/* <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p> */}
+                <p>Balance: ${ (Number(credit?.amount) - Number(pendingBalance)-Number(availableBalance)).toFixed(2) || "0.00"}</p>
+                <p>APR: %{ credit.APR || "NA"}</p>
+                {/* <p>Statement Freq: { credit.frequency|| "NA"}</p> */}
                 <button className="pay-credit-btn" onClick={()=>{
                     const markThisCreditLine ={
                         account,

@@ -35,8 +35,6 @@ export default function Savings({ account, setAccount }) {
     return (
         <>
             <div className="Credit">
-
-
             {
                 creditLines.length>0
                     ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} setMarkForCreditPay={setMarkForCreditPay} account={account} credit={credit} setMarkForCredit={setMarkForCredit} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>)
@@ -51,7 +49,7 @@ export default function Savings({ account, setAccount }) {
                 modal==1
                     ?<TransactionModal markForCredit={markForCredit} setMarkForCredit={setMarkForCredit} account={account} setModal={setModal}/>
                     : modal==2
-                        ? <TransferModal availableBalance={markForCreditPay.availableBalance} markForCreditPay={markForCreditPay} account={markForCreditPay.account} setModal={setModal}/>
+                        ? <TransferModal availableBalance={markForCreditPay.availableBalance} markForCreditPay={markForCreditPay} setMarkForCredit={setMarkForCredit} account={markForCreditPay.account} setModal={setModal}/>
                         :modal==3
                             ? <AddCreditModal account={account} setModal={setModal} userID={userID} childID={childID}/>
                             :markForAdmin
