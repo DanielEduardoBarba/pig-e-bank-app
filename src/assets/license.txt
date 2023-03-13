@@ -14,3 +14,19 @@ oink.wav
 short-coins.wav
     This work is licensed under the Attribution 4.0 License.
     https://freesound.org/people/sonically_sound/sounds/635937/
+
+insert-coin.wav
+    This work is licensed under the Creative Commons 0 License.
+    https://freesound.org/people/ToniTobe/sounds/233288/
+
+pig-squeak.wav
+    This work is licensed under the Attribution 4.0 License.
+    https://freesound.org/people/InspectorJ/sounds/439520/
+
+yay.wav
+    This work is licensed under the Creative Commons 0 License.
+    https://freesound.org/people/dr_skitz/sounds/353923/
+
+applause.wav
+    This work is licensed under the Creative Commons 0 License.
+    https://freesound.org/people/Sandermotions/sounds/277022/

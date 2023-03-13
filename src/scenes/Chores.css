@@ -140,7 +140,8 @@
     width: 80vw;
     height: 30px;
     border-radius: 10px;
-    
+    text-align: center;
+    font-size: 20px;
     font-family: 'Abril Fatface';
 }
 

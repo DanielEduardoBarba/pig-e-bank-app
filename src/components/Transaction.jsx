@@ -9,13 +9,12 @@ export default function Transaction({setModal,TX,setMarkForAdmin}){
                     setMarkForAdmin(TX)
                 }}></button>
                 <p>{TX.title}</p>
-                <p>{String(TX.account)}</p>
+                {/* <p>{String(TX.account)}</p> */}
                 <p>{TX.amount<0?"debit":"credit"}</p>
                 <p className="amount">
                     {TX.amount<0
-                        ?"-"
-                        :""}
-                        $
+                        ?"-$"
+                        :"$"}
                         {TX.amount<0
                             ?TX.amount*-1
                             :TX.amount
@@ -24,12 +23,11 @@ export default function Transaction({setModal,TX,setMarkForAdmin}){
                      {TX.isPending!="false"
                         ?"Pending"
                         :TX.currentBalance<0
-                            ?"-"
-                            :""}
-                            $
+                            ?"-$"
+                            :"$"} 
                             {TX.isPending!="false"
-                                ?"Pending"
-                                    :TX.currentBalance<0
+                                ?""
+                                :TX.currentBalance<0
                                         ?TX.currentBalance*-1
                                         :TX.currentBalance
                                         }</p>

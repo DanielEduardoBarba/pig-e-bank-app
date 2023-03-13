@@ -3,7 +3,8 @@ import { API_URL } from "../URLs"
 import Chore from "./Chore"
 import ChoresProgressBar from "./ChoresProgressBar"
 import { UserProvider } from "../App"
-
+import yay from "../assets/yay.wav"
+import applause from "../assets/applause.wav"
 export default function ChoresList({ modal, setModal, markComplete, setMarkComplete, markForAdmin, setMarkForAdmin }) {
     const [chores, setChores] = useState()
     const [bar, setBar] = useState(0)
@@ -17,7 +18,10 @@ export default function ChoresList({ modal, setModal, markComplete, setMarkCompl
                 if (chores[i].isDone !== "false") done++
                 console.log(chores[i].isDone)
             }
-            setBar(Math.floor((done / chores.length) * 100))
+            const progress = Math.floor((done / chores.length) * 100)
+            setBar(progress)
+            if(progress==100) new Audio(yay).play()
+            else if(progress>=50) new Audio(applause).play()
 
         } catch { }
 

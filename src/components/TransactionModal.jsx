@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react"
 import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
+import insertCoin from "../assets/insert-coin.wav"
 
 const transactionTemplate = { amount: "", title: "", type: "" }
 
@@ -45,6 +46,7 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
             .then(response=>{
                 console.log(response)
                 if(response.serverStatus==2){
+                    new Audio(insertCoin).play()
                     document.getElementById("transaction-form").reset()
                     setModal(0)
                 } 

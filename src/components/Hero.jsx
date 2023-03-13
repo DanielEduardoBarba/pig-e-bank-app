@@ -1,4 +1,6 @@
 import logo from "../assets/logo.png"
+import pigSqueak from "../assets/pig-squeak.wav"
+
 
 export default function Hero({tabName, setTab, setAccount, setChildID}){
     return(
@@ -20,7 +22,10 @@ export default function Hero({tabName, setTab, setAccount, setChildID}){
                         <option value="metrics">Charts</option>
                      </select>
         
-               <img onClick={()=>setChildID("")} className="logo" src={logo} />
+               <img onClick={()=>{
+                new Audio(pigSqueak).play()
+                setChildID("")
+                }} className="logo" src={logo} />
         </div>
         </>
     )

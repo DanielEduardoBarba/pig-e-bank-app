@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react"
 import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
+import shortCoins from "../assets/short-coins.wav"
 
 const transactionTemplate = { amount: "", title: ""}
 
@@ -102,6 +103,7 @@ export default function TransferModal({availableBalance, markForCreditPay, accou
                         .then(response=>{
             
                             if(response.serverStatus==2){
+                                new Audio(shortCoins).play()
                                 document.getElementById("transaction-form").reset()
                                 setModal(0)
                             } 
