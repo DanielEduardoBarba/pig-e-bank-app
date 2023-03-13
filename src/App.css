@@ -160,10 +160,13 @@
 }
 
 
-.Footer {
-  translate: 3px 5px;
-  background-color: transparent;
+
+.Footer{
+
+  background-color: lightpink;
   z-index: -1;
+  font-size: small;
+  padding: 3px;
 }
 
 .Hero {
