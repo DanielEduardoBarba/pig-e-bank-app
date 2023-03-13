@@ -90,14 +90,14 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
             <form id="admin-form" className="admin-form" onSubmit={e => submitWithPin(e)}>
                 <p>ID: {markForAdmin.transID || markForAdmin.choreID || "N/A"}</p>
                 <label>Title</label>
-                <input name="title" id="title" placeholder="title"
+                <input name="title" id="title" placeholder="title" readOnly="readOnly"
                     onChange={e => {
                         markForAdmin.title = e.target.value
                         setMarkForAdmin(markForAdmin)
                     }} />
 
                 <label>Amount</label>
-                <input name="amount" id="amount" placeholder="amount"
+                <input name="amount" id="amount" placeholder="amount" readOnly="readOnly"
                     onChange={e => {
                         markForAdmin.amount = e.target.value
                         setMarkForAdmin(markForAdmin)

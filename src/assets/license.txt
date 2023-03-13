@@ -10,6 +10,11 @@ task-icon.png
 credit-icon.png
     CC Atribution https://creativecommons.org/licenses/by/4.0/
     https://icon-icons.com/icon/credit-card/23779
+
+piggy-bank.png
+    CC Atribution https://creativecommons.org/licenses/by/4.0/
+    https://icon-icons.com/icon/Coin-money-piggy-resolutions-save-money-savings/51091
+
 oink.wav
     This work is licensed under the Creative Commons 0 License.
     https://freesound.org/people/krzpia/sounds/510974/

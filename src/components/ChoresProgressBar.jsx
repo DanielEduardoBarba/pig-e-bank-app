@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
+
 
 export default function ChoresProgressBar({bar}){
     
@@ -12,10 +13,10 @@ export default function ChoresProgressBar({bar}){
         <div className="outer-progress-bar">
             <div className="inner-progress-bar"
             style={{width:`${bar}%`, 
-                     backgroundColor: `rgb(${100/(bar/100)},${bar/100*255},0)`,
-                     boxShadow: bar==100?'0px 0px 20px 50px rgba(21, 255, 0, 1)':""
-                    }}/>
-                    % {bar} Complete
+            backgroundColor: `rgb(${100/(bar/100)},${bar/100*255},0)`,
+            boxShadow: bar==100?'0px 0px 20px 50px rgba(21, 255, 0, 1)':""
+        }}/>
+                    % {bar?bar:"0"} Complete
 
         </div>
 

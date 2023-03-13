@@ -8,10 +8,10 @@ export default function Transaction({setModal,TX,setMarkForAdmin}){
                 <button className="admin-transaction-btn" onClick={()=>{
                     setMarkForAdmin(TX)
                 }}></button>
-                <p>{TX.title}</p>
+                <p className="transaction-description">{TX.title}</p>
                 {/* <p>{String(TX.account)}</p> */}
                 <p>{TX.amount<0?"debit":"credit"}</p>
-                <p className="amount">
+                <p className="transaction-amount">
                     {TX.amount<0
                         ?"-$"
                         :"$"}
@@ -19,7 +19,7 @@ export default function Transaction({setModal,TX,setMarkForAdmin}){
                             ?TX.amount*-1
                             :TX.amount
                             }</p>
-                <p className="amount">
+                <p className="transaction-amount">
                      {TX.isPending!="false"
                         ?"Pending"
                         :TX.currentBalance<0

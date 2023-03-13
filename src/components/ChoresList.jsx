@@ -3,8 +3,12 @@ import { API_URL } from "../URLs"
 import Chore from "./Chore"
 import ChoresProgressBar from "./ChoresProgressBar"
 import { UserProvider } from "../App"
+import piggyBank from "../assets/piggy-bank.png"
 import yay from "../assets/yay.wav"
 import applause from "../assets/applause.wav"
+
+
+
 export default function ChoresList({ modal, setModal, markComplete, setMarkComplete, markForAdmin, setMarkForAdmin }) {
     const [chores, setChores] = useState()
     const [bar, setBar] = useState(0)
@@ -55,7 +59,9 @@ export default function ChoresList({ modal, setModal, markComplete, setMarkCompl
             <div className="progress-bar-div">
                 <ChoresProgressBar bar={bar} chores={chores} />
             </div>
-             
+            <div style={{width:`${10+bar}%`}} className="animate-piggy">
+                <img className="piggy-bank-icon" src={piggyBank} />
+            </div>
 
         </>
     )
