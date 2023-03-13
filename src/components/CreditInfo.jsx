@@ -15,7 +15,7 @@ export default function CreditInfo({credit, setModal, account, availableBalance,
                 <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
                 <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
                 <p>Balance: ${ (Number(pendingBalance)+Number(availableBalance)).toFixed(2) || "0.00"}</p>
-                <button onClick={()=>{
+                <button className="pay-credit-btn" onClick={()=>{
                     const markThisCreditLine ={
                         account,
                         availableBalance,
@@ -23,7 +23,7 @@ export default function CreditInfo({credit, setModal, account, availableBalance,
                     }
                     setMarkForCreditPay(markThisCreditLine)
                     setModal(2)
-                }}> Make a Payment</button>
+                }}>Pay</button>
             </div>
         </>
     )

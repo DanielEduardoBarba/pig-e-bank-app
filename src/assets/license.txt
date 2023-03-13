@@ -7,6 +7,9 @@ task-icon.png
     CC Atribution https://creativecommons.org/licenses/by/4.0/
     https://icon-icons.com/icon/note-task-comment-message-edit-write/108613
 
+credit-icon.png
+    CC Atribution https://creativecommons.org/licenses/by/4.0/
+    https://icon-icons.com/icon/credit-card/23779
 oink.wav
     This work is licensed under the Creative Commons 0 License.
     https://freesound.org/people/krzpia/sounds/510974/

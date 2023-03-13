@@ -22,6 +22,58 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
         }, [modal, markForAdmin])
 
 
+    const calculateInterest = (lastFeeTime, freq, data, i) =>{
+
+         //not right val
+         const milliSecInDay=1000*10
+         //const milliSecInDay=86400000
+         const milliSecInWeek=604800000
+         const milliSecInMonth=2628000000
+         const milliSecInYear=31540000000
+
+         let interestFeeTrans={}
+        
+        try{
+            if(lastFeeTime>data[i+1]?.transID) return false
+            // console.log(credit?.frequency, " ", lastFeeTime," ",data[i+1]?.transID)
+            let interestRateCharge=0
+             if(freq=="seconds") interestRateCharge=1000
+             if(freq=="daily") interestRateCharge=milliSecInDay
+             else if(freq=="weekly") interestRateCharge=milliSecInWeek
+             else if(freq=="monthly") interestRateCharge=milliSecInMonth
+             else return false
+
+                lastFeeTime+=interestRateCharge
+
+                 console.log("APR CURR BAL ",data[i].currentBalance)
+                 console.log("APR rate ",credit?.APR)
+                 console.log("time rate ", milliSecInDay/milliSecInYear)
+
+                //add 
+                 let fee = ( Number(data[i].currentBalance) * (Number(credit?.APR)*interestRateCharge/milliSecInYear))
+                 if(fee>-0.01)fee=-0.01
+                 fee=fee.toFixed(2)
+                 console.log("APR FEE: ", fee)
+                 
+                 interestFeeTrans={
+                     transID: lastFeeTime,
+                     account: credit.loanID,
+                     title:`Interest charge - Account: ${credit.loanID}`,
+                     isPending:"false",
+                     amount: String(fee),
+                     currentBalance:String(Number(fee)+Number(data[i].currentBalance))
+                 }
+                 
+        
+               return interestFeeTrans
+
+             
+         }catch{
+             
+         }
+
+    }
+
     const calculateAccount = (data) => {
         let approved = []
         let pending = []
@@ -29,15 +81,9 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
         let availableBalance=0
 
         let lastFeeTime=0
-        let fee=0
         
-        let interestFeeTrans={}
-        //not right val
-        const milliSecInDay=1000
-        //const milliSecInDay=86400000
-        const milliSecInWeek=604800000
-        const milliSecInMonth=2628000000
-        const milliSecInYear=31540000000
+       
+       
 
 
         if(account!=="checking" && account!=="savings") availableBalance=Number(credit.amount)
@@ -53,37 +99,12 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
                     catch{ }
                     availableBalance +=Number(data[i].amount)
                     approved.push(data[i])
-               
-                                try{
-                                    console.log(credit?.frequency, " ", lastFeeTime," ",data[i+1]?.transID)
-                                    if(credit?.frequency=="daily" && lastFeeTime<data[i+1]?.transID){
-                                        lastFeeTime+=milliSecInDay
-
-                                        console.log("APR CURR BAL ",data[i].currentBalance)
-                                        console.log("APR rate ",credit?.APR)
-                                        console.log("time rate ", milliSecInDay/milliSecInYear)
-                                        fee = ( Number(data[i].currentBalance) * (Number(credit?.APR)))
-
-                                        console.log("APR FEE: ", fee)
-                                        interestFeeTrans={
-                                            transID: lastFeeTime,
-                                            account: credit.loanID,
-                                            title:`Interest charge - Account: ${credit.loanID}`,
-                                            isPending:"false",
-                                            amount: String(fee),
-                                            currentBalance:String(fee+data[i].currentBalance)
-                                        }
-
-                                        approved.push(interestFeeTrans)
-                                      
-                                       // data[i-1]=interestFeeTrans
-                                        console.log("DATA BEING INJECTED ", interestFeeTrans)
-                                        console.log("DATA AFTER inject ", data[i])
-
-                                    }
-                                }catch{
-                                    
-                                }
+                    
+                    const interestFeeTrans=calculateInterest(lastFeeTime,credit?.frequency,data,i)
+                    lastFeeTime=interestFeeTrans.transID
+                    console.log("FROM interest Check: ",interestFeeTrans)
+                    if(interestFeeTrans)approved.push(interestFeeTrans)
+                    
                                         
                       
                     }

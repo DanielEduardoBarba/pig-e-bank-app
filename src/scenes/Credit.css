@@ -47,19 +47,38 @@
     -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
 }
 
-.CreditInfo>button {
-    background-color: lightblue;
-    border-radius: 20px;
-}
+
 
 .CreditInfo {
     padding: 20px;
     background-color: wheat;
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+.pay-credit-btn{
+
+    background-image: url("../assets/credit-icon.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 130% 180%;
+    width: 100px;
+    height: 50px;
+    color: rgb(0, 0, 0);
+    font-weight: 900;
+    font-size: 20px;
+    border-radius: 10px;
+    text-shadow: 2px 2px 2px rgb(255, 255, 255);
+    z-index: 1;
+
 }
 
 .CreditInfo>p {
+    border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+  height: fit-content;
+  background-color: whitesmoke;
     display: flex;
     flex-direction: column;
     justify-content: center;
