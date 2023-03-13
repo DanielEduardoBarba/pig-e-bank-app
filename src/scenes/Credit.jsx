@@ -42,7 +42,9 @@ export default function Savings({ account, setAccount }) {
                     ? creditLines.map(credit=><CreditLine key={credit.ID} modal={modal} setModal={setModal} setMarkForCreditPay={setMarkForCreditPay} account={account} credit={credit} setMarkForCredit={setMarkForCredit} markForAdmin={markForAdmin} setMarkForAdmin={setMarkForAdmin}/>)
                     :""
             }
-               <button onClick={()=>setModal(3)}>ADD A CREDIT LINE!</button> 
+               <div className="credit-line-div">
+               <button className="add-credit-line" onClick={()=>setModal(3)}/>
+               </div>
 
             </div>
             {

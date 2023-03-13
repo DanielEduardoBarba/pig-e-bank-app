@@ -7,8 +7,9 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
    const{userID, childID} = useContext(UserProvider)
     const [transactions, setTransactions] = useState([])
 
-    useEffect(() => {
 
+    useEffect(() => {
+        console.log("FREQ: ", credit?.frequency)
         fetch(`${API_URL}/transactions/${userID}/${childID}/${(credit?.loanID)?(credit?.loanID):account}`)
             .then(incoming => incoming.json())
             .then(data => {
@@ -27,6 +28,18 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
         let pendingBalance=0
         let availableBalance=0
 
+        let lastFeeTime=0
+        let fee=0
+        
+        let interestFeeTrans={}
+        //not right val
+        const milliSecInDay=1000
+        //const milliSecInDay=86400000
+        const milliSecInWeek=604800000
+        const milliSecInMonth=2628000000
+        const milliSecInYear=31540000000
+
+
         if(account!=="checking" && account!=="savings") availableBalance=Number(credit.amount)
         for (let i = 0; i < data.length; i++) {
             
@@ -34,13 +47,45 @@ export default function Transactionlist({credit, account, setModal, modal, setAv
                     data[i].currentBalance=Number(data[i].amount)
                     try{
                         if(data[i - 1].currentBalance){
-                            data[i].currentBalance = (Number(data[i].amount) + Number(data[i - 1].currentBalance)).toFixed(2)
+                            data[i].currentBalance = (Number(data[i].amount) + Number(credit?.frequency?interestFeeTrans.currentBalance:data[i - 1].currentBalance)).toFixed(2)
                         }
                     }
                     catch{ }
                     availableBalance +=Number(data[i].amount)
-                   // console.log(data[i].currentBalance)
-                            approved.push(data[i])
+                    approved.push(data[i])
+               
+                                try{
+                                    console.log(credit?.frequency, " ", lastFeeTime," ",data[i+1]?.transID)
+                                    if(credit?.frequency=="daily" && lastFeeTime<data[i+1]?.transID){
+                                        lastFeeTime+=milliSecInDay
+
+                                        console.log("APR CURR BAL ",data[i].currentBalance)
+                                        console.log("APR rate ",credit?.APR)
+                                        console.log("time rate ", milliSecInDay/milliSecInYear)
+                                        fee = ( Number(data[i].currentBalance) * (Number(credit?.APR)))
+
+                                        console.log("APR FEE: ", fee)
+                                        interestFeeTrans={
+                                            transID: lastFeeTime,
+                                            account: credit.loanID,
+                                            title:`Interest charge - Account: ${credit.loanID}`,
+                                            isPending:"false",
+                                            amount: String(fee),
+                                            currentBalance:String(fee+data[i].currentBalance)
+                                        }
+
+                                        approved.push(interestFeeTrans)
+                                      
+                                       // data[i-1]=interestFeeTrans
+                                        console.log("DATA BEING INJECTED ", interestFeeTrans)
+                                        console.log("DATA AFTER inject ", data[i])
+
+                                    }
+                                }catch{
+                                    
+                                }
+                                        
+                      
                     }
                     else{
                         pendingBalance += Number(data[i].amount)

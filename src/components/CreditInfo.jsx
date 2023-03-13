@@ -10,7 +10,7 @@ export default function CreditInfo({credit, setModal, account, availableBalance,
     console.log("CREDIT ", credit)
     return (
         <>
-            <div className="AccountInfo">
+            <div className="CreditInfo">
                 <p>Credit ID: {credit.loanID}</p>
                 <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
                 <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
