@@ -65,7 +65,10 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
             }}/>
             <div className="Login">
                 <p>{error || "LOGIN"}</p>
-                <img className="looking-logo-down" src={lookingLogo}/>
+                <img onClick={()=>{
+                     new Audio(oink).play()
+                     setParentModal(1)
+                }} className="looking-logo-down" src={lookingLogo}/>
                 <div className="login-form">
                 {
                     parentModal
