@@ -141,6 +141,7 @@
   background-color: wheat;
   display: flex;
   flex-direction: row;
+  overflow: scroll;
 }
 
 .AccountInfo>p{
