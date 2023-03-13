@@ -25,9 +25,9 @@ export default function Metrics(){
           .catch(() => window.alert('Chart failed to initialize'));
         
         // refresh the chart whenever #refreshButton is clicked
-        document
-          .getElementById('refreshButton')
-          .addEventListener('click', () => chart.refresh());
+        // document
+        //   .getElementById('refreshButton')
+        //   .addEventListener('click', () => chart.refresh());
         
        // embed a dashboard
     //     const dashboard = sdk.createDashboard({
@@ -43,9 +43,9 @@ export default function Metrics(){
 
     return(
         <>
-          <div style={{height:"500px"}}id="chart"/>
-          <div style={{height:"500px"}}id="chart1"/>
-        <button style={{height:"20px"}}id="refreshButton">Refresh</button>
+          <div style={{height:"500px", margin:"20px"}}id="chart"/>
+          <div style={{height:"500px",  margin:"20px"}}id="chart1"/>
+        {/* <button style={{height:"20px"}}id="refreshButton">Refresh</button> */}
         {/* <div style={{height:"200px"}} id="dashboard"/> */}
         </>
     )

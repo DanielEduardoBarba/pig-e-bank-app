@@ -6,7 +6,7 @@
     background-color: lightgoldenrodyellow;
     width: 75%;
     border-radius: 20px;
-    height: 300px;
+    height: 70vh;
     padding: 20px;
     overflow-inline:scroll;
     overflow-y: scroll;
@@ -22,15 +22,14 @@
 .add-chore-btn{
   position: absolute;
     background-image: url("../assets/plus-icon.png");
-
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
- 
+    translate: -50px 280px;
     width: 50px;
     height: 50px;
-    border-radius: 20px;
-    border: 3px solid transparent;
+    border-radius: 50%;
+    z-index: 1;
 }
 .admin-task-btn{
     position: absolute;
@@ -40,9 +39,9 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
-    translate:calc(-100%) -10px;
-    width: 50px;
-    height: 50px;
+    translate:-65px -8px;
+    width: 30px;
+    height: 30px;
     border-radius: 20px;
     border: 3px solid transparent;
 }
@@ -57,29 +56,43 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100% 100%;
-    translate:25px -10px;
-    width: 50px;
-    height: 50px;
+    translate: 20px -10px;
+    width: 40px;
+    height: 40px;
     border-radius: 20px;
     border: 3px solid transparent;
 
 }
 .chore {
+    position: relative;
     display: flex;
     justify-content: right;
     flex-direction: row;
     margin: 5px;
     border-radius: 10px;  
+    padding: 5px;
   }
   
-  .chore>p {
+  .chore-description {
     margin: 5px;
     padding:10px;
     text-align: center;
     background-color: lightblue;
-    box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+    width: 80%;
+    /* box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
     -webkit-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
-    -moz-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75); */
+    border-radius: 10px;
+  }
+  .chore-payout {
+    margin: 5px;
+    padding:10px;
+    text-align: center;
+    background-color: lightblue;
+    width: 20%;
+    /* box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+    -moz-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75); */
     border-radius: 10px;
   }
 
@@ -96,13 +109,18 @@
 
 .ChoresModal{
     position: absolute;
-    opacity: 1 !important;
     background-color: palevioletred;
     translate: calc(50vw - 50%) calc(50vh - 50%);
     display: flex;
     flex-direction: column;
     padding: 30px;
     border-radius: 50px;
+    z-index: 100;
+    
+}
+.blurr-background{
+    z-index: 100;
+    
 }
 .ChoresModal *{
     margin: 10px;
@@ -111,6 +129,12 @@
     padding: 10px;
 }
 
+.progress-bar-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .outer-progress-bar{
     background-color: white;
     width: 80vw;
@@ -133,7 +157,7 @@
     -moz-box-shadow: 0px 0px 10px 5px rgba(21, 255, 0, 0.75); */
 }
 
-.chores-form{
+.chore-form{
     background-color: aliceblue;
     display: flex;
     flex-direction: column;

@@ -10,8 +10,8 @@ export default function Chore({CH, setMarkComplete, setMarkForAdmin}){
                 setMarkForAdmin(CH)
                 console.log(CH)
             }}/>
-            <p>{CH.title}</p>
-            <p>Payout: ${CH.amount}</p>
+            <p className="chore-description">{CH.title}</p>
+            <p className="chore-payout">Payout: ${CH.amount}</p>
             {/* <p>{CH.isDone}</p> */}
             <button className="mark-task-btn" onClick={()=>setMarkComplete(CH)}/>
         </div>

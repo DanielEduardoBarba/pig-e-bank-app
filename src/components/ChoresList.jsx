@@ -39,9 +39,9 @@ export default function ChoresList({ modal, setModal, markComplete, setMarkCompl
     return (
         <>
             <div className="choreslist">
-         <button onClick={()=>{
-                   setModal(1)
-                }} className="add-chore-bn"/>
+                <button onClick={()=>{
+                          setModal(1)
+                       }} className="add-chore-btn"/>
                 {
                     chores
                         ? chores.map(CH => <Chore key={CH.choreID} CH={CH} setMarkComplete={setMarkComplete} setMarkForAdmin={setMarkForAdmin} />)

@@ -7,6 +7,8 @@ import { API_URL } from "../URLs";
 import NewChildSection from "../components/NewChildSection";
 import ParentAccountSection from "../components/ParentAccountSection";
 import logo from "../assets/logo.png"
+import oink from "../assets/oink.wav"
+import lookingLogo from "../assets/looking-logo.png"
 
 const firebaseConfig = {
     apiKey: "AIzaSyAe9lxdSMCdjXCd6z9C2Ln3eABwVyFlLD8",
@@ -63,6 +65,7 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
             }}/>
             <div className="Login">
                 <p>{error || "LOGIN"}</p>
+                <img className="looking-logo-down" src={lookingLogo}/>
                 <div className="login-form">
                 {
                     parentModal
@@ -79,7 +82,10 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
                 </div>
                 
             </div>
-                <img className="parent-modal-btn" src={logo} onClick={()=>setParentModal(1)} />
+                <img className="parent-modal-btn" src={logo} onClick={()=>{
+                    new Audio(oink).play()
+                    setParentModal(1)
+                }} />
         </>
     )
 }
