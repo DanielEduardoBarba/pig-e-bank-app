@@ -1,5 +1,5 @@
 .Login {
- 
+
     position: absolute;
     translate: calc(50vw - 50%) calc(50vh - 50%);
     display: flex;
@@ -11,7 +11,7 @@
     z-index: 100;
 }
 
-.Login>p{
+.Login>p {
     width: 100%;
     text-align: center;
 }
@@ -48,7 +48,7 @@
 
 }
 
-.parent-modal-btn{
+.parent-modal-btn {
     position: absolute;
     opacity: 1 !important;
     background-color: transparent;
@@ -58,11 +58,11 @@
     z-index: 100;
 }
 
-.looking-logo-down{
+.looking-logo-down {
     background-color: transparent;
     border: 10px solid transparent;
     border-radius: 10%;
     width: 50px;
-    filter: drop-shadow(0px 0px 10px );
-    
-  }
+    filter: drop-shadow(0px 0px 10px);
+
+}

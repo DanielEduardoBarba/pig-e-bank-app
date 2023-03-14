@@ -2,19 +2,17 @@ import { useEffect, useContext } from "react"
 import { API_URL } from "../URLs"
 import { UserProvider } from "../App"
 
-let enteredPin = 0
-
 export default function AdminActionCenter({ account, markForAdmin, setMarkForAdmin, setError, pin }) {
 
     const { userID, childID } = useContext(UserProvider)
 
     useEffect(() => {
+
         document.getElementById("title").value = markForAdmin.title
         document.getElementById("amount").value = markForAdmin.amount
 
         markForAdmin.action = ""
         setMarkForAdmin(markForAdmin)
-        console.log("ADMIN CENTER ACCOUNT: ",account)
     }, [])
 
     const submitWithPin = (e) => {
@@ -51,10 +49,6 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
                         })
                         .catch(console.error)
 
-                    //APPROVE TRANSACTION routing
-                    //console.log(markForAdmin.action)
-                    //console.log("You just fetched: "+`${API_URL}/${routing}/${userID}/${childID}/${account}`)
-
                     if (markForAdmin.action == "approve" || markForAdmin.action == "pending") {
                         fetch(`${API_URL}/${routing}/${userID}/${childID}/${account}`, {
                             method: "PATCH",
@@ -65,8 +59,7 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
                         })
                             .then(incoming => incoming.json())
                             .then(response => {
-                                console.log(response)
-                                console.log(markForAdmin)
+
                                 if ((markForAdmin.action == "approve" || markForAdmin.action == "pending")
                                     && response.serverStatus == 34) {
                                     document.getElementById("admin-form").reset()
@@ -88,8 +81,11 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
     return (
         <>
             <form id="admin-form" className="admin-form" onSubmit={e => submitWithPin(e)}>
+
                 <p>ID: {markForAdmin.transID || markForAdmin.choreID || "N/A"}</p>
+
                 <label>Title</label>
+
                 <input name="title" id="title" placeholder="title" readOnly="readOnly"
                     onChange={e => {
                         markForAdmin.title = e.target.value
@@ -111,8 +107,8 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
                     setMarkForAdmin(markForAdmin)
                 }}>
                     <option value="">Select Action</option>
-                    {account!=="chores" && markForAdmin.isPending!="false"?<option value="approve">Approve</option>:""}
-                    {(account!=="chores" && markForAdmin.isPending=="false") && account!="credit"?<option value="pending">Pending</option>:""}
+                    {account !== "chores" && markForAdmin.isPending != "false" ? <option value="approve">Approve</option> : ""}
+                    {(account !== "chores" && markForAdmin.isPending == "false") && account != "credit" ? <option value="pending">Pending</option> : ""}
                     <option value="remove">Remove</option>
                 </select>
 

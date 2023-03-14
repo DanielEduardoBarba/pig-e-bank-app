@@ -8,76 +8,84 @@
   overflow: hidden;
 }
 
-.transactionUI>button:not(:hover){
+.transactionUI>button:not(:hover) {
   transition: 0.25s ease-in-out;
   transform: scale(1.0);
 }
 
-.transactionUI>button:hover{
+.transactionUI>button:hover {
   transition: 0.25s ease-in-out;
   transform: scale(1.05);
-  box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.5);
-  -webkit-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.5);
-  -moz-box-shadow: 0px 0px 10px 2px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.5);
 }
-.transactionUI>button{
-  background-color:lightcyan;
+
+.transactionUI>button {
+  background-color: lightcyan;
   margin: 10px;
 }
-.transaction-list{
-  scroll-behavior: smooth; 
+
+.transaction-list {
+  scroll-behavior: smooth;
   /* background-color: lightgoldenrodyellow; */
   width: 80vw;
   border-radius: 20px;
   min-height: 50%;
   max-height: 55vh;
   padding: 20px;
-  overflow-inline:scroll;
+  overflow-inline: scroll;
   overflow-y: scroll;
   overflow-x: scroll;
   margin: 10px auto;
   border: 3px solid black;
-  
+
 }
 
-.add-transaction{
+.add-transaction {
   border-radius: 10px;
   padding: 10px;
   width: 100%;
 }
-.make-transfer{
+
+.make-transfer {
   border-radius: 10px;
   padding: 10px;
   width: 100%;
 }
-.transaction-amount{
+
+.transaction-amount {
   min-width: 55px;
   overflow: scroll;
 }
-.transaction-description{
+
+.transaction-description {
   width: 100%;
   overflow: scroll;
 }
-.single-transaction>p{
+
+.single-transaction>p {
   border-radius: 5px;
   display: flex;
   align-items: center;
   margin: 5px;
-  padding:10px;
+  padding: 10px;
   background-color: wheat;
 
 }
 
-.single-transaction:not(:hover){
-  transition: 0.5s ease-in-out  ;
+.single-transaction:not(:hover) {
+  transition: 0.5s ease-in-out;
 }
-.single-transaction:hover{
-  transition: 0.5s ease-in-out  ;
-  box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
-  -webkit-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
-  -moz-box-shadow: -1px 0px 67px 27px rgba(0,0,0,0.75);
+
+.single-transaction:hover {
+  transition: 0.5s ease-in-out;
+  box-shadow: -1px 0px 67px 27px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -1px 0px 67px 27px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -1px 0px 67px 27px rgba(0, 0, 0, 0.75);
 }
-.single-transaction{
+
+.single-transaction {
   position: relative;
   display: flex;
   justify-content: right;
@@ -88,7 +96,7 @@
   height: 70px;
 }
 
-.TransactionModal{
+.TransactionModal {
   position: absolute;
   opacity: 1 !important;
   background-color: palevioletred;
@@ -100,29 +108,29 @@
   z-index: 100;
 }
 
-.TransactionModal *{
+.TransactionModal * {
   margin: 10px;
   font-size: large;
   border-radius: 10px;
   padding: 10px;
 }
 
-.transaction-form{
+.transaction-form {
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
 }
 
-.transactionUI{
+.transactionUI {
   display: flex;
   flex-direction: row;
   z-index: 1;
 }
 
-.admin-transaction-btn{
+.admin-transaction-btn {
   position: absolute;
   background-image: url("./assets/gear-icon.png");
-  translate:10px -5px;
+  translate: 10px -5px;
   background-color: transparent;
   height: 100px;
   width: 100%;
@@ -136,8 +144,8 @@
   border: 3px solid transparent;
 }
 
-.AccountInfo{
-  padding:20px;
+.AccountInfo {
+  padding: 20px;
   background-color: wheat;
   display: flex;
   flex-direction: row;
@@ -146,22 +154,20 @@
   height: 15vh;
 }
 
-.AccountInfo>p{
+.AccountInfo>p {
   border: 1px solid black;
   padding: 5px;
   margin: 5px;
   height: fit-content;
   background-color: whitesmoke;
- display: flex;
- flex-direction: column;
- justify-content: center;
- text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 
 }
 
-
-
-.Footer{
+.Footer {
   background-color: lightpink;
   z-index: -1;
   font-size: small;
@@ -177,24 +183,24 @@
 
 }
 
-.Hero>select{
+.Hero>select {
   background-color: aliceblue;
   border-radius: 20px;
   text-align: center;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: 600;
   margin-right: 20px;
 }
 
-.logo{
+.logo {
   background-color: transparent;
   border: 10px solid transparent;
   border-radius: 10%;
   width: 50px;
-  filter: drop-shadow(0px 0px 10px );
+  filter: drop-shadow(0px 0px 10px);
 }
 
-.blurr-background{
+.blurr-background {
   position: absolute;
   background-color: rgb(241, 211, 216);
   opacity: 0.9;
@@ -203,7 +209,7 @@
   height: 100%;
 }
 
-.AdminModal{
+.AdminModal {
   position: absolute;
   opacity: 1 !important;
   background-color: grey;
@@ -214,16 +220,17 @@
   border-radius: 50px;
   z-index: 100;
 }
-.admin-form{
+
+.admin-form {
   background-color: whitesmoke;
   display: flex;
   flex-direction: column;
   justify-content: end;
 }
-.AdminModal *{
+
+.AdminModal * {
   margin: 10px;
   font-size: large;
   border-radius: 10px;
   padding: 10px;
 }
-

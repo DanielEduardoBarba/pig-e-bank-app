@@ -1,11 +1,10 @@
-import userPic from "../assets/profile-emojis/3.png"
-import { PIC_URI } from "../URLs"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { UserProvider } from "../App"
+import userPic from "../assets/profile-emojis/3.png"
 
 
 export default function AcountInfo({availableBalance, pendingBalance}) {
-    const { userID, childID } = useContext(UserProvider)
+    const { childID } = useContext(UserProvider)
 
 //console.log(PIC_URI)
     return (
@@ -15,6 +14,7 @@ export default function AcountInfo({availableBalance, pendingBalance}) {
                     style={{ width: '100px', height: '100px' }}
                     src={userPic} />
                 <p>Welcome back {childID}!</p>
+
                 <p>Available: ${Number(availableBalance).toFixed(2) || "0.00"}</p>
                 <p>Pending: ${Number(pendingBalance).toFixed(2) || "0.00"}</p>
                 <p>Balance: ${(Number(pendingBalance)+Number(availableBalance)).toFixed(2) || "0.00"}</p>

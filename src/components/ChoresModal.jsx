@@ -1,10 +1,10 @@
-import { useState, useContext} from "react"
+import { useState, useContext } from "react"
 import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
 
 const choreTemplate = { amount: "", title: "", type: "" }
 
-export default function ChoresModal({account,setModal}) {
+export default function ChoresModal({ setModal }) {
 
     const { userID, childID } = useContext(UserProvider)
     const [newChore, setNewChore] = useState(choreTemplate)
@@ -13,64 +13,62 @@ export default function ChoresModal({account,setModal}) {
 
     const submitChore = (e) => {
         e.preventDefault()
+
         let amountAlert = document.getElementById("amount").style
-        let titleAlert = document.getElementById("title").style 
+        let titleAlert = document.getElementById("title").style
 
-        if ( newChore.title && newChore.amount) {
-            newChore.childID=childID
-            newChore.userID=userID
-            newChore.isDone="false"
-            
+        if (newChore.title && newChore.amount) {
+            newChore.childID = childID
+            newChore.userID = userID
+            newChore.isDone = "false"
+
             console.log(newChore)
-            fetch(`${API_URL}/chores`,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
+            fetch(`${API_URL}/chores`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                body:JSON.stringify(newChore)
+                body: JSON.stringify(newChore)
             })
-            .then(incoming=>incoming.json())
-            .then(response=>{
-                console.log(response)
-                if(response.serverStatus==2){
-                    document.getElementById("chore-form").reset()
-                    setModal(0)
-                } 
-                else setError("Server failed :( try again...")
-                    
-             })
-             .catch(console.error)
-        
-        }
-        else { 
-            if (!newChore.amount) amountAlert.backgroundColor="yellow"
-            if (!newChore.title) titleAlert.backgroundColor="yellow"
-        }
-           
+                .then(incoming => incoming.json())
+                .then(response => {
+                    if (response.serverStatus == 2) {
+                        document.getElementById("chore-form").reset()
+                        setModal(0)
+                    }
+                    else setError("Server failed :( try again...")
+                })
+                .catch(console.error)
 
-
-        
+        }
+        else {
+            if (!newChore.amount) amountAlert.backgroundColor = "yellow"
+            if (!newChore.title) titleAlert.backgroundColor = "yellow"
+        }
     }
-
-
 
     return (
         <>
-            <div className='blurr-background' onClick={()=>{
+            <div className='blurr-background' onClick={() => {
                 setModal(0)
                 console.log(0)
-                }}/>
+            }} />
+
             <div className="ChoresModal">
+
                 <h3>{error || "Add Chore"}</h3>
-                <form id="chore-form" className="chore-form" onSubmit={e =>submitChore(e)}>
+
+                <form id="chore-form" className="chore-form" onSubmit={e => submitChore(e)}>
+
                     <label>Chore Name</label>
+
                     <input name="title" id="title" placeholder="chore name" onChange={e => {
                         const asciiVal = e.target.value.charCodeAt(e.target.value.length - 1)
                         if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122) || (asciiVal == 32 && e.target.value.length > 1)) {
                             newChore.title = e.target.value
                             setNewChore(newChore)
                         }
-                        else document.getElementById("title").value = e.target.value.substring(0, e.target.value.length - 1)   
+                        else document.getElementById("title").value = e.target.value.substring(0, e.target.value.length - 1)
                     }} />
 
                     <label>$</label>
@@ -83,7 +81,7 @@ export default function ChoresModal({account,setModal}) {
                             else document.getElementById("amount").value = e.target.value.substring(0, e.target.value.length - 1)
                         }} />
 
-                <button>Add</button>
+                    <button>Add</button>
                 </form>
 
             </div>

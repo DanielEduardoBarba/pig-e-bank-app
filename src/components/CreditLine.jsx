@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react"
-import CreditInfo from "../components/CreditInfo"
 import TransactionList from "../components/TransactionList"
+import CreditInfo from "../components/CreditInfo"
 
 
 export default function CreditLine({ account, modal, setModal, credit, setMarkForCreditPay, setMarkForCredit, markForAdmin, setMarkForAdmin }) {
     const [availableBalance, setAvailableBalance] = useState(0)
     const [pendingBalance, setPendingBalance] = useState(0)
-   
-    useEffect(()=>{
+
+    useEffect(() => {
         setAvailableBalance(credit.amount)
-    },[])
+    }, [])
 
     return (
         <>
@@ -29,7 +29,7 @@ export default function CreditLine({ account, modal, setModal, credit, setMarkFo
                     setMarkForAdmin={setMarkForAdmin} />
 
             </div>
-           
+
         </>
     )
 }

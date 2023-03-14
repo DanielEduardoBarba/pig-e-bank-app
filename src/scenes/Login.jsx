@@ -1,11 +1,11 @@
 import { initializeApp } from "firebase/app"
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import { useEffect, useState } from "react";
-import "./Login.css"
 import ChildLoginSection from "../components/ChildLoginSection";
-import { API_URL } from "../URLs";
 import NewChildSection from "../components/NewChildSection";
 import ParentAccountSection from "../components/ParentAccountSection";
+import { API_URL } from "../URLs";
+import "./Login.css"
 import logo from "../assets/logo.png"
 import oink from "../assets/oink.wav"
 import lookingLogo from "../assets/looking-logo.png"
@@ -34,11 +34,11 @@ const handleLogin = (setUserID) => {
 }
 
 
-export default function Login({ userID, setUserID, childID, setChildID }) {
+export default function Login({ userID, setUserID, setChildID }) {
     const [children, setChildren] = useState("")
     const [error, setError] = useState("")
     const [newChild, setNewChild] = useState(0)
-    const [parentModal,setParentModal] = useState(0)
+    const [parentModal, setParentModal] = useState(0)
 
     useEffect(() => {
         if (localStorage.getItem("uid")) setUserID(localStorage.getItem("uid"))
@@ -59,36 +59,37 @@ export default function Login({ userID, setUserID, childID, setChildID }) {
 
     return (
         <>
-            <div className='blurr-background' onClick={()=>{
-               setParentModal(0)
-               setError("LOGIN")
-            }}/>
+            <div className='blurr-background' onClick={() => {
+                setParentModal(0)
+                setError("LOGIN")
+            }} />
+
             <div className="Login">
                 <p>{error || "LOGIN"}</p>
-                <img onClick={()=>{
-                     new Audio(oink).play()
-                     setParentModal(1)
-                }} className="looking-logo-down" src={lookingLogo}/>
-                <div className="login-form">
-                {
-                    parentModal
-                    ?<ParentAccountSection handleLogin={handleLogin} userID={userID} setUserID={setUserID} setChildID={setChildID} setChildren={setChildren}/>
-                    :""
-                }
-                    {
-                    userID && !children.length
-                        ?<NewChildSection setParentModal={setParentModal} setNewChild={setNewChild} setError={setError} children={children} userID={userID} setChildID={setChildID}/>
-                        :userID && children
-                            ?<ChildLoginSection setError={setError} children={children} userID={userID} setChildID={setChildID} />
-                            : ""
-                }
-                </div>
-                
-            </div>
-                <img className="parent-modal-btn" src={logo} onClick={()=>{
+                <img onClick={() => {
                     new Audio(oink).play()
                     setParentModal(1)
-                }} />
+                }} className="looking-logo-down" src={lookingLogo} />
+                <div className="login-form">
+                    {
+                        parentModal
+                            ? <ParentAccountSection handleLogin={handleLogin} userID={userID} setUserID={setUserID} setChildID={setChildID} setChildren={setChildren} />
+                            : ""
+                    }
+                    {
+                        userID && !children.length
+                            ? <NewChildSection setParentModal={setParentModal} setNewChild={setNewChild} setError={setError} children={children} userID={userID} setChildID={setChildID} />
+                            : userID && children
+                                ? <ChildLoginSection setError={setError} children={children} userID={userID} setChildID={setChildID} />
+                                : ""
+                    }
+                </div>
+
+            </div>
+            <img className="parent-modal-btn" src={logo} onClick={() => {
+                new Audio(oink).play()
+                setParentModal(1)
+            }} />
         </>
     )
 }

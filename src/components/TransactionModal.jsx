@@ -1,86 +1,89 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext } from "react"
 import { UserProvider } from "../App"
 import { API_URL } from "../URLs"
 import insertCoin from "../assets/insert-coin.wav"
 
 const transactionTemplate = { amount: "", title: "", type: "" }
 
-export default function TransactionModal({markForCredit, setMarkForCredit, account,setModal}) {
+export default function TransactionModal({ markForCredit, account, setModal }) {
 
     const { userID, childID } = useContext(UserProvider)
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
 
-   // console.log("ACCOUNT NOW: ", account,'Mark for credit', markForCredit)
+    // console.log("ACCOUNT NOW: ", account,'Mark for credit', markForCredit)
     const submitTransaction = (e) => {
         e.preventDefault()
+
         let amountAlert = document.getElementById("amount").style
         let typeAlert = document.getElementById("type").style
-        let titleAlert = document.getElementById("title").style 
+        let titleAlert = document.getElementById("title").style
 
         if (newTransaction.type && newTransaction.title && newTransaction.amount) {
-            newTransaction.childID=childID
-            newTransaction.userID=userID
-            //console.log("ACCOUNT NOW ", account)
-            if(account=="checking" || account=="savings") newTransaction.account=account
-            else newTransaction.account=markForCredit.loanID
-           // console.log(markForCredit.loanID)
-            
-            if(newTransaction.type=="debit"){
-                newTransaction.isPending="false"
-                newTransaction.amount*=-1
-            } else{
-                newTransaction.isPending=""
+            newTransaction.childID = childID
+            newTransaction.userID = userID
+
+            if (account == "checking" || account == "savings") newTransaction.account = account
+            else newTransaction.account = markForCredit.loanID
+
+
+            if (newTransaction.type == "debit") {
+                newTransaction.isPending = "false"
+                newTransaction.amount *= -1
+            } else {
+                newTransaction.isPending = ""
             }
-            
-            
-            console.log(newTransaction)
-            fetch(`${API_URL}/transactions`,{
-                method:"POST",
-                headers:{
-                    "Content-Type":"application/json"
+
+            fetch(`${API_URL}/transactions`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                body:JSON.stringify(newTransaction)
+                body: JSON.stringify(newTransaction)
             })
-            .then(incoming=>incoming.json())
-            .then(response=>{
-                console.log(response)
-                if(response.serverStatus==2){
-                    new Audio(insertCoin).play()
-                    document.getElementById("transaction-form").reset()
-                    setModal(0)
-                } 
-                else setError("Server failed :( try again...")
-                    
-             })
-             .catch(console.error)
-        
+                .then(incoming => incoming.json())
+                .then(response => {
+                    console.log(response)
+                    if (response.serverStatus == 2) {
+                        new Audio(insertCoin).play()
+                        document.getElementById("transaction-form").reset()
+                        setModal(0)
+                    }
+                    else setError("Server failed :( try again...")
+
+                })
+                .catch(console.error)
+
         }
-        else { 
-            if (!newTransaction.amount) amountAlert.backgroundColor="yellow"
-            if (!newTransaction.type) typeAlert.backgroundColor="yellow"
-            if (!newTransaction.title) titleAlert.backgroundColor="yellow"
+        else {
+            if (!newTransaction.amount) amountAlert.backgroundColor = "yellow"
+            if (!newTransaction.type) typeAlert.backgroundColor = "yellow"
+            if (!newTransaction.title) titleAlert.backgroundColor = "yellow"
         }
-           
+
     }
 
     return (
         <>
-            <div className='blurr-background' onClick={()=>{
+            <div className='blurr-background' onClick={() => {
                 setModal(0)
-                }}/>
+            }} />
+
             <div className="TransactionModal">
+
                 <h3>{error || "Add Transaction"}</h3>
-            <form id="transaction-form" className="transaction-form" onSubmit={e =>submitTransaction(e)}>
+
+                <form id="transaction-form" className="transaction-form" onSubmit={e => submitTransaction(e)}>
+
                     <label>Transaction Name</label>
                     <input name="title" id="title" placeholder="transaction name" onChange={e => {
-                          const asciiVal = e.target.value.charCodeAt(e.target.value.length - 1)
-                          if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122) || (asciiVal == 32 && e.target.value.length > 1)) {
+                        const asciiVal = e.target.value.charCodeAt(e.target.value.length - 1)
+                        if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122) || (asciiVal == 32 && e.target.value.length > 1)) {
                             newTransaction.title = e.target.value
                             setNewTransaction(newTransaction)
-                          }
-                          else document.getElementById("title").value = e.target.value.substring(0, e.target.value.length - 1)
-                        
+                        }
+                        else document.getElementById("title").value = e.target.value.substring(0, e.target.value.length - 1)
+
                     }} />
 
                     <label>Transaction Type</label>
@@ -90,7 +93,7 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
                     }}>
                         <option value="">Select Transaction Type</option>
                         <option value="debit">Debit</option>
-                        {account=="credit"?"":<option value="credit">Credit</option>}
+                        {account == "credit" ? "" : <option value="credit">Credit</option>}
                     </select>
 
                     <label>$</label>
@@ -103,7 +106,7 @@ export default function TransactionModal({markForCredit, setMarkForCredit, accou
                             else document.getElementById("amount").value = e.target.value.substring(0, e.target.value.length - 1)
                         }} />
 
-                <button>Submit</button>
+                    <button>Submit</button>
                 </form>
 
             </div>

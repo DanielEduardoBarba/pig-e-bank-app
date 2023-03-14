@@ -1,12 +1,11 @@
-
-
-.Savings{
+.Savings {
     position: relative;
     height: 85%;
     background-color: transparent;
     border-radius: 10px;
     padding: 10px;
 }
-.Savings *{
-    border-radius:10px;
+
+.Savings * {
+    border-radius: 10px;
 }

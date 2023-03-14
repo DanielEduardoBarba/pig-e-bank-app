@@ -1,13 +1,12 @@
 
 
-export default function Footer(){
+export default function Footer() {
 
-    return(
+    return (
         <>
-        <footer className="Footer">
-        <small>©{new Date().getFullYear()} Daniel Barba, All Rights Reserved</small>
-        </footer>
-        
+            <footer className="Footer">
+                <small>©{new Date().getFullYear()} Daniel Barba, All Rights Reserved</small>
+            </footer>
         </>
     )
 }

@@ -1,12 +1,10 @@
-import { useState, useContext, useEffect } from "react"
-import { UserProvider } from "../App"
+import { useState } from "react"
 import { API_URL } from "../URLs"
 
 let enteredPin = 0
 
 
 export default function ChoresModal({ markComplete, setMarkComplete }) {
-    const { userID, childID } = useContext(UserProvider)
     const [pin, setPin] = useState(0)
     const [error, setError] = useState("")
 
@@ -14,7 +12,6 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
 
         e.preventDefault()
         let pinForm = document.getElementById("pin").style
-
 
         fetch(`${API_URL}/findpin/${markComplete.userID}/${markComplete.childID}`)
             .then(incoming => incoming.json())
@@ -24,7 +21,6 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                     markComplete.action &&
                     response[0].pin == pin) {
 
-                  
                     fetch(`${API_URL}/chores`, {
                         method: "PATCH",
                         headers: {
@@ -35,11 +31,11 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                         .then(incoming => incoming.json())
                         .then(response => {
                             //console.log("RESPONSE MARK CHORES ", response)
-                            if (response.serverStatus == 2 && markComplete.action=="done") {
+                            if (response.serverStatus == 2 && markComplete.action == "done") {
                                 document.getElementById("chore-form").reset()
                                 setMarkComplete("")
                             }
-                            else if (response.serverStatus == 34 && markComplete.action=="pending") {
+                            else if (response.serverStatus == 34 && markComplete.action == "pending") {
                                 document.getElementById("chore-form").reset()
                                 setMarkComplete("")
                             }
@@ -63,8 +59,11 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
             <div className='blurr-background' onClick={() => {
                 setMarkComplete("")
             }} />
+
             <div className="ChoresModal">
+
                 <h3>{error || "Confirm Task is Done!"}</h3>
+
                 <form id="chore-form" className="chore-form" onSubmit={e => submitWithPin(e)}>
 
                     <p>Did you complete the task:</p>
@@ -72,15 +71,15 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                         {markComplete.title}</p>
 
                     <select name="action" id="action" onChange={e => {
-                    if (e.target.value == "") markComplete.action = ""
-                    if (e.target.value == "done") markComplete.action = "done"
-                    if (e.target.value == "pending") markComplete.action = "pending"
-                    setMarkComplete(markComplete)
-                }}>
-                    <option value="">Select Action</option>
-                    <option value="done">Done</option>
-                    <option value="pending">Not Done</option>
-                </select>
+                        if (e.target.value == "") markComplete.action = ""
+                        if (e.target.value == "done") markComplete.action = "done"
+                        if (e.target.value == "pending") markComplete.action = "pending"
+                        setMarkComplete(markComplete)
+                    }}>
+                        <option value="">Select Action</option>
+                        <option value="done">Done</option>
+                        <option value="pending">Not Done</option>
+                    </select>
 
                     <label>Confirm with your pin</label>
 
@@ -94,7 +93,7 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                         }} />
 
                     <button>Mark Chore</button>
-                   
+
                 </form>
 
             </div>

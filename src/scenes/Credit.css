@@ -57,7 +57,8 @@
     align-items: center;
     overflow: scroll;
 }
-.pay-credit-btn{
+
+.pay-credit-btn {
 
     background-image: url("../assets/credit-icon.png");
     background-repeat: no-repeat;
@@ -76,10 +77,10 @@
 
 .CreditInfo>p {
     border: 1px solid black;
-  padding: 5px;
-  margin: 5px;
-  height: fit-content;
-  background-color: whitesmoke;
+    padding: 5px;
+    margin: 5px;
+    height: fit-content;
+    background-color: whitesmoke;
     display: flex;
     flex-direction: column;
     justify-content: center;
