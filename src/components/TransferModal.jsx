@@ -46,7 +46,7 @@ export default function TransferModal({ availableBalance, markForCreditPay, setM
             document.getElementById("amount").style.backgroundColor = "yellow"
             return
         }
-        
+
         if (newTransaction.amount) {
 
             newTransaction.childID = childID
@@ -90,7 +90,7 @@ export default function TransferModal({ availableBalance, markForCreditPay, setM
                         })
                             .then(incoming => incoming.json())
                             .then(response => {
-                                    console.log(response)
+                          
                                 if (response.serverStatus == 2) {
                                     if(account=="credit")setMarkForCredit("")
                                     setNewTransaction(transactionTemplate)
