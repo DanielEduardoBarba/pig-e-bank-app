@@ -8,6 +8,8 @@
   overflow: hidden;
 }
 
+
+
 .transactionUI>button:not(:hover) {
   transition: 0.25s ease-in-out;
   transform: scale(1.0);
