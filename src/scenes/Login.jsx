@@ -17,7 +17,7 @@ const firebaseConfig = {
     storageBucket: "pig-e-bank-app.appspot.com",
     messagingSenderId: "363998592448",
     appId: "1:363998592448:web:82f0bd653d9105a19a9c25"
-};
+}
 
 const handleLogin = (setUserID) => {
     const app = initializeApp(firebaseConfig)
@@ -26,7 +26,6 @@ const handleLogin = (setUserID) => {
 
     signInWithPopup(auth, provider)
         .then(_user => {
-            console.log(_user)
             setUserID(_user.user.uid)
             localStorage.setItem("uid", _user.user.uid)
         })
@@ -50,7 +49,7 @@ export default function Login({ userID, setUserID, setChildID }) {
                 .then(incoming => incoming.json())
                 .then(data => {
                     setChildren(data)
-                    console.log(data)
+       
                 })
                 .catch(console.error)
         }

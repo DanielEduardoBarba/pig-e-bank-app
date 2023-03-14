@@ -11,7 +11,6 @@ export default function TransactionModal({ markForCredit, account, setModal }) {
     const [newTransaction, setNewTransaction] = useState(transactionTemplate)
     const [error, setError] = useState("")
 
-    // console.log("ACCOUNT NOW: ", account,'Mark for credit', markForCredit)
     const submitTransaction = (e) => {
         e.preventDefault()
 
@@ -43,7 +42,7 @@ export default function TransactionModal({ markForCredit, account, setModal }) {
             })
                 .then(incoming => incoming.json())
                 .then(response => {
-                    console.log(response)
+              
                     if (response.serverStatus == 2) {
                         new Audio(insertCoin).play()
                         document.getElementById("transaction-form").reset()

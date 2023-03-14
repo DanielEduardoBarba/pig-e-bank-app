@@ -22,7 +22,6 @@ export default function ChoresModal({ setModal }) {
             newChore.userID = userID
             newChore.isDone = "false"
 
-            console.log(newChore)
             fetch(`${API_URL}/chores`, {
                 method: "POST",
                 headers: {
@@ -49,10 +48,7 @@ export default function ChoresModal({ setModal }) {
 
     return (
         <>
-            <div className='blurr-background' onClick={() => {
-                setModal(0)
-                console.log(0)
-            }} />
+            <div className='blurr-background' onClick={() => {setModal(0)}} />
 
             <div className="ChoresModal">
 

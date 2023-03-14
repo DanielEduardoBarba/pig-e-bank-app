@@ -30,7 +30,7 @@ export default function ChoresModal({ markComplete, setMarkComplete }) {
                     })
                         .then(incoming => incoming.json())
                         .then(response => {
-                            //console.log("RESPONSE MARK CHORES ", response)
+                            
                             if (response.serverStatus == 2 && markComplete.action == "done") {
                                 document.getElementById("chore-form").reset()
                                 setMarkComplete("")

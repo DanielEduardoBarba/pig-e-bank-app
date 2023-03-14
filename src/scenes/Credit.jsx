@@ -22,10 +22,7 @@ export default function Savings({ account }) {
 
         fetch(`${API_URL}/credit/${userID}/${childID}`)
             .then(incoming => incoming.json())
-            .then(data => {
-                console.log(data)
-                setCreditLine(data)
-            })
+            .then(data => setCreditLine(data))
             .catch(console.error)
 
     }, [modal])

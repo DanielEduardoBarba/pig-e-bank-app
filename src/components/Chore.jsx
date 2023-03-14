@@ -8,7 +8,6 @@ export default function Chore({ CH, setMarkComplete, setMarkForAdmin }) {
                 <button className="admin-task-btn" onClick={() => {
                     CH.action = "chore"
                     setMarkForAdmin(CH)
-                    console.log(CH)
                 }} />
 
                 <p className="chore-description">{CH.title}</p>

@@ -25,7 +25,7 @@ export default function AddCredit({ account, setModal }) {
         })
             .then(incoming => incoming.json())
             .then(response => {
-                console.log(response)
+                
                 if (response.serverStatus == 2) {
                     document.getElementById("transaction-form").reset()
                     setModal(0)

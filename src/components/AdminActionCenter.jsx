@@ -40,7 +40,7 @@ export default function AdminActionCenter({ account, markForAdmin, setMarkForAdm
                     })
                         .then(incoming => incoming.json())
                         .then(response => {
-                            console.log(response)
+         
                             if (markForAdmin.action == "remove" && response.serverStatus == 34) {
                                 document.getElementById("admin-form").reset()
                                 setMarkForAdmin("")

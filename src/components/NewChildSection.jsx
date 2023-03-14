@@ -81,7 +81,6 @@ export default function NewChildSection({ setParentModal, setNewChild, setError,
                 <input name="childName" id="childName" placeholder="child name"
                     onChange={e => {
                         const asciiVal = e.target.value.charCodeAt(e.target.value.length - 1)
-                        //console.log(asciiVal)
                         if ((asciiVal >= 65 && asciiVal <= 90) || (asciiVal >= 97 && asciiVal <= 122) || (asciiVal == 32 && e.target.value.length > 1)) {
                             setChildName(e.target.value)
                             document.getElementById("adminPin").placeholder = `admin pin for ${e.target.value}`

@@ -21,7 +21,6 @@ export default function ChoresList({ modal, setModal, markComplete, setMarkCompl
 
             for (let i = 0; i < chores.length; i++) {
                 if (chores[i].isDone !== "false") done++
-                console.log(chores[i].isDone)
             }
 
             const progress = Math.floor((done / chores.length) * 100)
