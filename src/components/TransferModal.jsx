@@ -41,13 +41,12 @@ export default function TransferModal({ availableBalance, markForCreditPay, setM
     const submitTransfer = (e) => {
         e.preventDefault()
 
-        if (availableBalance <= newTransaction.amount) {
+        if (availableBalance < newTransaction.amount) {
             setError("Insufficient funds!")
             document.getElementById("amount").style.backgroundColor = "yellow"
             return
         }
-
-
+        
         if (newTransaction.amount) {
 
             newTransaction.childID = childID
@@ -67,7 +66,7 @@ export default function TransferModal({ availableBalance, markForCreditPay, setM
 
             newTransaction.isPending = "false"
             newTransaction.amount *= -1
-
+            
             fetch(`${API_URL}/transactions`, {
                 method: "POST",
                 headers: {
@@ -77,7 +76,7 @@ export default function TransferModal({ availableBalance, markForCreditPay, setM
             })
                 .then(incoming => incoming.json())
                 .then(response => {
-
+                    
                     if (response.serverStatus == 2) {
                         newTransaction.account = newTransaction.sendTo
                         newTransaction.amount *= -1
@@ -91,9 +90,9 @@ export default function TransferModal({ availableBalance, markForCreditPay, setM
                         })
                             .then(incoming => incoming.json())
                             .then(response => {
-
+                                    console.log(response)
                                 if (response.serverStatus == 2) {
-                                    setMarkForCredit("")
+                                    if(account=="credit")setMarkForCredit("")
                                     setNewTransaction(transactionTemplate)
                                     new Audio(shortCoins).play()
                                     document.getElementById("transaction-form").reset()
