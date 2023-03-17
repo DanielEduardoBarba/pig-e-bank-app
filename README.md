@@ -8,14 +8,14 @@ Chores tracking as income!
 
 Teaching tool for parents!
 
+### Email any questions or concerns to danieleduardobarba@gmail.com
 
 ## Free to use! [Try it today!](https://app.pigebank.click)
 
-
-### Email any questions or concerns to danieleduardobarba@gmail.com
+![](./src/assets/demo-phone.png)
 
 ![](./src/assets/looking-logo.png)
 
-## See the API [HERE](https://github.com/DanielEduardoBarba/pig-e-bank-api)
+## See the API REPO [HERE](https://github.com/DanielEduardoBarba/pig-e-bank-api)
 
 
