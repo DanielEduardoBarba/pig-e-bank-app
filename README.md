@@ -1,6 +1,5 @@
 A finance and chore tracking app for kids!
 
-
 Simulated banking experience (Credit, Savings, Credit accounts)!
 
 Chores tracking as income!
