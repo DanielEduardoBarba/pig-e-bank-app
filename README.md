@@ -10,7 +10,7 @@ Teaching tool for parents!
 
 ### Email any questions or concerns to danieleduardobarba@gmail.com
 
-## Free to use! [Try it today!](https://app.pigebank.click)
+## Free to use! [Try the APP!](https://app.pigebank.click)
 
 ![](./src/assets/demo-phone.png)
 
