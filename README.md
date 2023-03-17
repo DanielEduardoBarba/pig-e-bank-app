@@ -8,7 +8,7 @@ Chores tracking as income!
 Teaching tool for parents!
 
 
-Free to use! [Sign up today!](https://app.pigebank.click)
+Free to use! [Try it today!](https://app.pigebank.click)
 
 
 Email any questions or concerns to danieleduardobarba@gmail.com
