@@ -11,10 +11,18 @@ export default function AddCredit({ account, setModal }) {
     const submitCreditLine = (e) => {
         e.preventDefault()
 
+        if(!newCredit.frequency || !newCredit.amount || !newCredit.loanID || !newCredit.APR){
+            if(!newCredit.loanID) document.getElementById("title").style.backgroundColor="yellow"
+            if(!newCredit.amount) document.getElementById("amount").style.backgroundColor="yellow"
+            if(!newCredit.frequency) document.getElementById("frequency").style.backgroundColor="yellow"
+            if(!newCredit.APR) document.getElementById("APR").style.backgroundColor="yellow"
+            return
+        }
 
         newCredit.account = account
         newCredit.userID = userID
         newCredit.childID = childID
+
 
         fetch(`${API_URL}/credit`, {
             method: "POST",
@@ -71,7 +79,7 @@ export default function AddCredit({ account, setModal }) {
                     <option value="monthly">Monthly</option>
                     <option value="weekly">Weekly</option>
                     <option value="daily">Daily</option>
-                    <option value="seconds">Seconds</option>
+                    {/* <option value="seconds">Seconds</option> */}
                 </select>
 
                 <label>Credit Line </label>
